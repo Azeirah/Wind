@@ -1,4 +1,4 @@
-function Pointer() {
+function Pointer(x, y) {
     var pointer = this;
 
     this.positionChangedListeners = {};
@@ -11,15 +11,9 @@ function Pointer() {
     // when the pointer dies, it can be cleaned up.
     pointer.dead = false;
 
-    // Are there more sensible defaults? Go lower? Undefined? 0? -1?
-    pointer[0] = -10000;
-    pointer[1] = -10000;
+    pointer[0] = x;
+    pointer[1] = y;
 }
-
-Pointer.prototype.setOrigin = function(origin) {
-    this[0] = origin[0];
-    this[1] = origin[1];
-};
 
 Pointer.prototype.setDrawingFunction = function (drawFn) {
     this.drawFn = drawFn;

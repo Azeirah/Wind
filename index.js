@@ -45,16 +45,12 @@ var pointerManager = new PointerManager();
 // this project will be injected into a higher-level "brushes" codebase
 // where this ugly code makes sense
 canvas.addEventListener("az-dragStart", function(event) {
-    var pointer = new Swinger();
+    var pointer = new Swinger(event.clientX, event.clientY);
     pointer.setDrawingFunction(function () {
         drawCircle(ctx, this);
     });
 
-    pointer.setOrigin([event.clientX, event.clientY]);
-    pointer.setTarget([event.clientX, event.clientY]);
-
     mirror(pointer, "horizontal", true);
-    // shotgun(pointer, ctx);
 
     pointer.onPositionChanged(function () {
         this.drawFn();
@@ -70,31 +66,6 @@ canvas.addEventListener("az-drag", function(event) {
 canvas.addEventListener("az-dragEnd", function() {
     pointerManager.entities.forEach(function (entity) {
         entity.friction = 0.9;
-    })
+    });
     pointerManager.freeEntities();
 });
-
-
-// var hammer = new Hammer.Manager(canvas);
-
-// var swipe = new Hammer.Swipe();
-// hammer.add(swipe);
-
-// hammer.on('swipe', function (event) {
-//     var pointer = new Slider();
-//     pointer.drawFn = function() {
-//         drawCircle(ctx, this);
-//     };
-//     mirror(pointer, '4-way');
-//     pointer.velocity = [event.velocityX, event.velocityY];
-//     pointer[0] = event.pointers[0].clientX;
-//     pointer[1] = event.pointers[0].clientY;
-
-//     setInterval(function () {
-//         pointer.step();
-//     }, 1000/60);
-
-//     pointer.onPositionChanged(function () {
-//         drawCircle(ctx, this);
-//     });
-// });

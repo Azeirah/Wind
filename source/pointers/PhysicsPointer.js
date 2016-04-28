@@ -1,8 +1,8 @@
 // this is an abstract class, treat it as such.
 PhysicsPointer.prototype = new Pointer();
-function PhysicsPointer(ctx) {
-    Pointer.call(this, ctx);
-    this.target = [];
+function PhysicsPointer() {
+    Pointer.apply(this, arguments);
+    this.target = [this[0], this[1]];
 }
 
 PhysicsPointer.prototype.setTarget = function (target) {
