@@ -9,7 +9,7 @@ function Slider() {
 Slider.prototype.step = function () {
     var previousPosition = [this[0], this[1]];
 
-    if (this[0]) {
+    if (!this.dead) {
         var dx = this.target[0] - this[0];
         var dy = this.target[1] - this[1];
 
@@ -24,7 +24,11 @@ Slider.prototype.step = function () {
         this[0] += this.velocity[0];
         this[1] += this.velocity[1];
 
-        this.speed = Math.sqrt(Math.pow(previousPosition[0] - this[0], 2) + Math.pow(previousPosition[1] - this[1], 2));
+        this.speed = geometry.calculateSpeed(this, previousPosition);
+        this.speed = geometry.calculateAngle(this, previousPosition);
         this.notifyPositionChangedListeners();
+        if (this.speed <= 0.01) {
+            this.dead = true;
+        }
     }
 };

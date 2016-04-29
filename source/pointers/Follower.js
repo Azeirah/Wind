@@ -7,13 +7,13 @@ function Follower(ctx) {
     var follower = this;
     Pointer.call(this, ctx);
 
-    ctx.canvas.addEventListener("az-dragStart", function (event) {
+    document.body.addEventListener("az-dragStart", function (event) {
         follower[0] = event.clientX;
         follower[1] = event.clientY;
         follower.notifyPositionChangedListeners();
     });
 
-    ctx.canvas.addEventListener("az-drag", function (event) {
+    document.body.addEventListener("az-drag", function (event) {
        follower[0] = event.clientX;
        follower[1] = event.clientY;
        follower.notifyPositionChangedListeners();
