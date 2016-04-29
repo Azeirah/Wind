@@ -12,15 +12,15 @@ var geometry = {};
 
 // calculate speed using Pythagoras' formula
 geometry.calculateSpeed = function (lastPosition, currentPosition) {
-    var dx = previousPosition[0] - currentPosition[0];
-    var dy = previousPosition[1] - currentPosition[1];
+    var dx = lastPosition[0] - currentPosition[0];
+    var dy = lastPosition[1] - currentPosition[1];
 
     return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
 };
 
 geometry.calculateAngle = function (lastPosition, currentPosition) {
-    var dx = previousPosition[0] - currentPosition[0];
-    var dy = previousPosition[1] - currentPosition[1];
+    var dx = lastPosition[0] - currentPosition[0];
+    var dy = lastPosition[1] - currentPosition[1];
 
     return Math.atan2(dy, dx);
 };

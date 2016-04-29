@@ -16,7 +16,7 @@ Stalker.prototype.step = function() {
         this[1] += dy * this.stepSize;
 
         this.speed = geometry.calculateSpeed(this, previousPosition);
-        this.speed = geometry.calculateAngle(this, previousPosition);
+        this.angle = geometry.calculateAngle(this, previousPosition);
         if (this.speed <= 0.01) {
             this.dead = true;
         }
