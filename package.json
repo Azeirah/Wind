@@ -1,5 +1,5 @@
 {
-  "name": "wind",
+  "name": "az-wind",
   "version": "0.1.0",
   "description": "A library for the exploration of motion in painting",
   "main": "dist/wind.js",
