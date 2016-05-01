@@ -1,3 +1,6 @@
+var PhysicsPointer = require("./PhysicsPointer");
+var geometry = require("../geometry");
+
 Slider.prototype = new PhysicsPointer();
 function Slider() {
     PhysicsPointer.apply(this, arguments);
@@ -32,3 +35,5 @@ Slider.prototype.step = function () {
         }
     }
 };
+
+module.exports = Slider;

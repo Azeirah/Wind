@@ -1,20 +1,20 @@
 function PointerManager(ctx) {
-    var engine = this;
+    var manager = this;
     // this is the code that manages all the physics objects
     // calls their step functions and their render functions
-    // make sure to instantiate the engine before creating
+    // make sure to instantiate the manager before creating
     // PhysicsPointer objects
     this.entities = [];
     this.ctx = ctx;
 
     function cleanup() {
-        engine.entities = engine.entities.filter(function (entity) {
+        manager.entities = manager.entities.filter(function (entity) {
             return !entity.dead;
         });
     }
 
     function step() {
-        engine.entities.forEach(function(entity) {
+        manager.entities.forEach(function(entity) {
             if (!entity.dead) {
                 entity.step();
             }
@@ -42,3 +42,5 @@ PointerManager.prototype.freeEntities = function () {
         entity.free = true;
     });
 }
+
+module.exports = PointerManager;

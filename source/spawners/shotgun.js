@@ -20,3 +20,5 @@ function shotgun(pointer, ctx) {
         });
     });
 }
+
+module.exports = shotgun;

@@ -1,3 +1,6 @@
+var PhysicsPointer = require("./PhysicsPointer");
+var geometry = require("../geometry");
+
 Stalker.prototype = new PhysicsPointer();
 function Stalker(ctx) {
     PhysicsPointer.apply(this, arguments);
@@ -23,3 +26,5 @@ Stalker.prototype.step = function() {
         this.notifyPositionChangedListeners();
     }
 };
+
+module.exports = Stalker;

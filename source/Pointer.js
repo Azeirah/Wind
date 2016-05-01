@@ -39,3 +39,5 @@ Pointer.prototype.notifyPositionChangedListeners = function () {
         listener.apply(pointer, args);
     });
 };
+
+module.exports = Pointer;

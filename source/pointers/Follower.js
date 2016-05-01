@@ -2,10 +2,12 @@
 // whose position is always equal
 // to the mouse's position
 
+var Pointer = require("../Pointer");
+
 Follower.prototype = new Pointer();
-function Follower(ctx) {
+function Follower() {
     var follower = this;
-    Pointer.call(this, ctx);
+    Pointer.apply(this, arguments);
 
     document.body.addEventListener("az-dragStart", function (event) {
         follower[0] = event.clientX;
@@ -19,3 +21,5 @@ function Follower(ctx) {
        follower.notifyPositionChangedListeners();
    });
 }
+
+module.exports = Follower;

@@ -1,3 +1,6 @@
+var copyAttributesToObject = require("../util").copyAttributesToObject;
+var Pointer = require("../Pointer");
+
 function _mirrorHorizontal(pointer, origin) {
     var p1 = new Pointer();
     p1.setDrawingFunction(pointer.drawFn);
@@ -55,3 +58,5 @@ function mirror(pointer, how, origin) {
             break;
     }
 }
+
+module.exports = mirror;

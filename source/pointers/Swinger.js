@@ -1,3 +1,6 @@
+var PhysicsPointer = require("./PhysicsPointer");
+var geometry = require("../geometry");
+
 Swinger.prototype = new PhysicsPointer();
 function Swinger() {
     PhysicsPointer.apply(this, arguments);
@@ -29,3 +32,5 @@ Swinger.prototype.step = function() {
         this.notifyPositionChangedListeners();
     }
 };
+
+module.exports = Swinger;
