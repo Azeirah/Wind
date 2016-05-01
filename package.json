@@ -1,0 +1,28 @@
+{
+  "name": "wind",
+  "version": "0.1.0",
+  "description": "A library for the exploration of motion in painting",
+  "main": "dist/wind.js",
+  "scripts": {
+    "dist": "browserify index.js --s wind > dist/wind.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/Azeirah/wind.git"
+  },
+  "keywords": [
+    "wind",
+    "motion",
+    "vector",
+    "position",
+    "cursor",
+    "painting",
+    "paint",
+    "drawing"
+  ],
+  "devDependencies": {
+    "browserify": "13.0.0"
+  },
+  "author": "Martijn Brekelmans",
+  "license": "MIT"
+}
