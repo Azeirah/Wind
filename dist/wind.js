@@ -1,23 +1,14 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.wind = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (global){
-// module.exports = {
-//     PointerManager: require("./source/PointerManager"),
-//     Follower: require("./source/pointers/Follower"),
-//     Swinger: require("./source/pointers/Swinger"),
-//     Stalker: require("./source/pointers/Stalker"),
-//     Slider: require("./source/pointers/Slider"),
-//     mirror: require("./source/spawners/mirror")
-// };
-
 global.PointerManager = require("./source/PointerManager");
-global.Follower = require("./source/pointers/Follower");
+global.Cursor = require("./source/pointers/Cursor");
 global.Swinger = require("./source/pointers/Swinger");
 global.Stalker = require("./source/pointers/Stalker");
 global.Slider = require("./source/pointers/Slider");
 global.mirror = require("./source/spawners/mirror");
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./source/PointerManager":3,"./source/pointers/Follower":5,"./source/pointers/Slider":7,"./source/pointers/Stalker":8,"./source/pointers/Swinger":9,"./source/spawners/mirror":10}],2:[function(require,module,exports){
+},{"./source/PointerManager":3,"./source/pointers/Cursor":5,"./source/pointers/Slider":7,"./source/pointers/Stalker":8,"./source/pointers/Swinger":9,"./source/spawners/mirror":10}],2:[function(require,module,exports){
 function Pointer(x, y) {
     var pointer = this;
 
@@ -132,31 +123,31 @@ module.exports = {
 };
 
 },{}],5:[function(require,module,exports){
-// The follower pointer is a pointer
+// The cursor pointer is a pointer
 // whose position is always equal
 // to the mouse's position
 
 var Pointer = require("../Pointer");
 
-Follower.prototype = new Pointer();
-function Follower() {
-    var follower = this;
+Cursor.prototype = new Pointer();
+function Cursor() {
+    var cursor = this;
     Pointer.apply(this, arguments);
 
     document.body.addEventListener("az-dragStart", function (event) {
-        follower[0] = event.clientX;
-        follower[1] = event.clientY;
-        follower.notifyPositionChangedListeners();
+        cursor[0] = event.clientX;
+        cursor[1] = event.clientY;
+        cursor.notifyPositionChangedListeners();
     });
 
     document.body.addEventListener("az-drag", function (event) {
-       follower[0] = event.clientX;
-       follower[1] = event.clientY;
-       follower.notifyPositionChangedListeners();
+       cursor[0] = event.clientX;
+       cursor[1] = event.clientY;
+       cursor.notifyPositionChangedListeners();
    });
 }
 
-module.exports = Follower;
+module.exports = Cursor;
 
 },{"../Pointer":2}],6:[function(require,module,exports){
 var Pointer = require("../Pointer");

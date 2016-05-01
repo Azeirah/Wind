@@ -47,7 +47,7 @@ The swinger acts like a ball on an elastic rope. It's practically a spring-syste
 
 ## How does it work?
 
-The whole library is structured using prototypal OOP.
+The whole library is structured using prototypal OOP. Instances of pointers can be created
 
 ```js
 // set up some drawing
@@ -75,16 +75,4 @@ cursor.onPositionChanged(function () {
 
 ## Use `wind` in your project
 
-It's best to clone directly from git as a submodule to your project and use the following html snippet in your <head></head>
-
-```html
-<!-- This one is required if you want to use the pointers at all! -->
-<script src="wind/source/PointerManager.js"></script>
-
-<!-- Nesting is used to indicate what depends on what -->
-<script src="wind/source/Pointer.js"></script>
-    <script src="wind/source/pointers/PhysicsPointer.js"></script>
-        <script src="wind/source/pointers/Stalker.js"></script>
-        <script src="wind/source/pointers/Swinger.js"></script>
-    <script src="wind/source/pointers/Follower.js"></script>
-```
+Install wind using npm, `npm install wind`
