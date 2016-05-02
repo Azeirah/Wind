@@ -103,7 +103,7 @@ module.exports = PointerManager;
 
 },{}],4:[function(require,module,exports){
 // calculate speed using Pythagoras' formula
-function calculateSpeed (lastPosition, currentPosition) {
+function calculateDistance (lastPosition, currentPosition) {
     var dx = lastPosition[0] - currentPosition[0];
     var dy = lastPosition[1] - currentPosition[1];
 
@@ -117,9 +117,19 @@ function calculateAngle (lastPosition, currentPosition) {
     return Math.atan2(dy, dx);
 }
 
+/**
+ * Calculates if a point lies within or outside a circle of given radius
+ * @param  {[number, number]} point [description]
+ * @return {boolean}
+ */
+function withinCircle(origin, point, radius) {
+    return calculateDistance(origin, point) <= radius;
+}
+
 module.exports = {
-    calculateSpeed: calculateSpeed,
-    calculateAngle: calculateAngle
+    calculateDistance: calculateDistance,
+    calculateAngle: calculateAngle,
+    withinCircle: withinCircle
 };
 
 },{}],5:[function(require,module,exports){
@@ -201,7 +211,7 @@ Slider.prototype.step = function () {
         this[0] += this.velocity[0];
         this[1] += this.velocity[1];
 
-        this.speed = geometry.calculateSpeed(this, previousPosition);
+        this.speed = geometry.calculateDistance(this, previousPosition);
         this.angle = geometry.calculateAngle(this, previousPosition);
         this.notifyPositionChangedListeners();
         if (this.speed <= 0.01) {
@@ -233,7 +243,7 @@ Stalker.prototype.step = function() {
         this[0] += dx * this.stepSize;
         this[1] += dy * this.stepSize;
 
-        this.speed = geometry.calculateSpeed(this, previousPosition);
+        this.speed = geometry.calculateDistance(this, previousPosition);
         this.angle = geometry.calculateAngle(this, previousPosition);
         if (this.speed <= 0.01) {
             this.dead = true;
@@ -271,7 +281,7 @@ Swinger.prototype.step = function() {
         this[0] += this.velocity[0];
         this[1] += this.velocity[1];
 
-        this.speed = geometry.calculateSpeed(this, previousPosition);
+        this.speed = geometry.calculateDistance(this, previousPosition);
         this.angle = geometry.calculateAngle(this, previousPosition);
         if (this.speed <= 0.01) {
             this.dead = true;

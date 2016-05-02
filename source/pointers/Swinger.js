@@ -24,7 +24,7 @@ Swinger.prototype.step = function() {
         this[0] += this.velocity[0];
         this[1] += this.velocity[1];
 
-        this.speed = geometry.calculateSpeed(this, previousPosition);
+        this.speed = geometry.calculateDistance(this, previousPosition);
         this.angle = geometry.calculateAngle(this, previousPosition);
         if (this.speed <= 0.01) {
             this.dead = true;
