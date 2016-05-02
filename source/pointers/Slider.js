@@ -1,16 +1,16 @@
 var PhysicsPointer = require("./PhysicsPointer");
-var geometry = require("../geometry");
 
-Slider.prototype = new PhysicsPointer();
+Slider.prototype = new PhysicsPointer(0, 0);
 function Slider() {
     PhysicsPointer.apply(this, arguments);
     this.velocity = [0, 0];
+    // empirically chosen value
     this.friction = .987;
     this.scale = 0.01;
 }
 
 Slider.prototype.step = function () {
-    var previousPosition = [this[0], this[1]];
+    this.beforeStep();
 
     if (!this.dead) {
         var dx = this.target[0] - this[0];
@@ -27,12 +27,7 @@ Slider.prototype.step = function () {
         this[0] += this.velocity[0];
         this[1] += this.velocity[1];
 
-        this.speed = geometry.calculateDistance(this, previousPosition);
-        this.angle = geometry.calculateAngle(this, previousPosition);
-        this.notifyPositionChangedListeners();
-        if (this.speed <= 0.01) {
-            this.dead = true;
-        }
+        this.afterStep();
     }
 };
 

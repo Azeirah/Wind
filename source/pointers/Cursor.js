@@ -4,7 +4,7 @@
 
 var Pointer = require("../Pointer");
 
-Cursor.prototype = new Pointer();
+Cursor.prototype = new Pointer(0, 0);
 function Cursor() {
     var cursor = this;
     Pointer.apply(this, arguments);

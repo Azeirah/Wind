@@ -1,6 +1,10 @@
 function Pointer(x, y) {
     var pointer = this;
 
+    if (x === undefined || y === undefined) {
+        throw new ReferenceError("Pointer did not receive initial x, y coordinates");
+    }
+
     this.positionChangedListeners = {};
 
     // the pointer is considered "free" when it shouldn't

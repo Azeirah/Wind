@@ -15,7 +15,8 @@ function calculateAngle (lastPosition, currentPosition) {
 
 /**
  * Calculates if a point lies within or outside a circle of given radius
- * @param  {[number, number]} point [description]
+ * @param  {[number, number]} origin, origin of the circle
+ * @param  {[number, number]} point, point to check
  * @return {boolean}
  */
 function withinCircle(origin, point, radius) {

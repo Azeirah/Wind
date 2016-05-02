@@ -1,7 +1,6 @@
 var PhysicsPointer = require("./PhysicsPointer");
-var geometry = require("../geometry");
 
-Stalker.prototype = new PhysicsPointer();
+Stalker.prototype = new PhysicsPointer(0, 0);
 function Stalker(ctx) {
     PhysicsPointer.apply(this, arguments);
     this.stepSize = 0.05;
@@ -9,7 +8,7 @@ function Stalker(ctx) {
 }
 
 Stalker.prototype.step = function() {
-    var previousPosition = [this[0], this[1]];
+    this.beforeStep();
 
     if (!this.dead) {
         var dx = this.target[0] - this[0];
@@ -18,12 +17,7 @@ Stalker.prototype.step = function() {
         this[0] += dx * this.stepSize;
         this[1] += dy * this.stepSize;
 
-        this.speed = geometry.calculateDistance(this, previousPosition);
-        this.angle = geometry.calculateAngle(this, previousPosition);
-        if (this.speed <= 0.01) {
-            this.dead = true;
-        }
-        this.notifyPositionChangedListeners();
+       this.afterStep();
     }
 };
 

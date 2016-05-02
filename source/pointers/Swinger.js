@@ -1,7 +1,6 @@
 var PhysicsPointer = require("./PhysicsPointer");
-var geometry = require("../geometry");
 
-Swinger.prototype = new PhysicsPointer();
+Swinger.prototype = new PhysicsPointer(0, 0);
 function Swinger() {
     PhysicsPointer.apply(this, arguments);
     this.velocity = [0, 0];
@@ -10,7 +9,7 @@ function Swinger() {
 }
 
 Swinger.prototype.step = function() {
-    var previousPosition = [this[0], this[1]];
+    this.beforeStep();
 
     if (!this.dead) {
         var dx = this.target[0] - this[0];
@@ -24,12 +23,7 @@ Swinger.prototype.step = function() {
         this[0] += this.velocity[0];
         this[1] += this.velocity[1];
 
-        this.speed = geometry.calculateDistance(this, previousPosition);
-        this.angle = geometry.calculateAngle(this, previousPosition);
-        if (this.speed <= 0.01) {
-            this.dead = true;
-        }
-        this.notifyPositionChangedListeners();
+        this.afterStep();
     }
 };
 

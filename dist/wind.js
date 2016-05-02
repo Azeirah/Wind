@@ -12,6 +12,10 @@ global.mirror = require("./source/spawners/mirror");
 function Pointer(x, y) {
     var pointer = this;
 
+    if (x === undefined || y === undefined) {
+        throw new ReferenceError("Pointer did not receive initial x, y coordinates");
+    }
+
     this.positionChangedListeners = {};
 
     // the pointer is considered "free" when it shouldn't
@@ -119,7 +123,8 @@ function calculateAngle (lastPosition, currentPosition) {
 
 /**
  * Calculates if a point lies within or outside a circle of given radius
- * @param  {[number, number]} point [description]
+ * @param  {[number, number]} origin, origin of the circle
+ * @param  {[number, number]} point, point to check
  * @return {boolean}
  */
 function withinCircle(origin, point, radius) {
@@ -139,7 +144,7 @@ module.exports = {
 
 var Pointer = require("../Pointer");
 
-Cursor.prototype = new Pointer();
+Cursor.prototype = new Pointer(0, 0);
 function Cursor() {
     var cursor = this;
     Pointer.apply(this, arguments);
@@ -161,9 +166,10 @@ module.exports = Cursor;
 
 },{"../Pointer":2}],6:[function(require,module,exports){
 var Pointer = require("../Pointer");
+var geometry = require("../geometry");
 
 // this is an abstract class, treat it as such.
-PhysicsPointer.prototype = new Pointer();
+PhysicsPointer.prototype = new Pointer(0, 0);
 function PhysicsPointer() {
     Pointer.apply(this, arguments);
     this.target = [this[0], this[1]];
@@ -179,22 +185,42 @@ PhysicsPointer.prototype.step = function() {
     console.log("Please implement the step function for your pointer");
 };
 
+PhysicsPointer.prototype.beforeStep = function () {
+    this._previousPosition = [this[0], this[1]];
+};
+
+PhysicsPointer.prototype.afterStep = function after() {
+    if (! this._previousPosition) {
+        throw new ReferenceError("You've forgotten a `beforeStep` call in your step function");
+    }
+    this.speed = geometry.calculateDistance(this, this._previousPosition);
+    this.angle = geometry.calculateAngle(this, this._previousPosition);
+    // determine if a pointer is dead by the following reasoning
+    // first, is the speed really low?
+    // then check, is the pointer free? then it has stopped moving
+    if (this.speed <= 0.01 && this.free) {
+        this.dead = true;
+    } else {
+        this.notifyPositionChangedListeners();
+    }
+};
+
 module.exports = PhysicsPointer;
 
-},{"../Pointer":2}],7:[function(require,module,exports){
+},{"../Pointer":2,"../geometry":4}],7:[function(require,module,exports){
 var PhysicsPointer = require("./PhysicsPointer");
-var geometry = require("../geometry");
 
-Slider.prototype = new PhysicsPointer();
+Slider.prototype = new PhysicsPointer(0, 0);
 function Slider() {
     PhysicsPointer.apply(this, arguments);
     this.velocity = [0, 0];
+    // empirically chosen value
     this.friction = .987;
     this.scale = 0.01;
 }
 
 Slider.prototype.step = function () {
-    var previousPosition = [this[0], this[1]];
+    this.beforeStep();
 
     if (!this.dead) {
         var dx = this.target[0] - this[0];
@@ -211,22 +237,16 @@ Slider.prototype.step = function () {
         this[0] += this.velocity[0];
         this[1] += this.velocity[1];
 
-        this.speed = geometry.calculateDistance(this, previousPosition);
-        this.angle = geometry.calculateAngle(this, previousPosition);
-        this.notifyPositionChangedListeners();
-        if (this.speed <= 0.01) {
-            this.dead = true;
-        }
+        this.afterStep();
     }
 };
 
 module.exports = Slider;
 
-},{"../geometry":4,"./PhysicsPointer":6}],8:[function(require,module,exports){
+},{"./PhysicsPointer":6}],8:[function(require,module,exports){
 var PhysicsPointer = require("./PhysicsPointer");
-var geometry = require("../geometry");
 
-Stalker.prototype = new PhysicsPointer();
+Stalker.prototype = new PhysicsPointer(0, 0);
 function Stalker(ctx) {
     PhysicsPointer.apply(this, arguments);
     this.stepSize = 0.05;
@@ -234,7 +254,7 @@ function Stalker(ctx) {
 }
 
 Stalker.prototype.step = function() {
-    var previousPosition = [this[0], this[1]];
+    this.beforeStep();
 
     if (!this.dead) {
         var dx = this.target[0] - this[0];
@@ -243,22 +263,16 @@ Stalker.prototype.step = function() {
         this[0] += dx * this.stepSize;
         this[1] += dy * this.stepSize;
 
-        this.speed = geometry.calculateDistance(this, previousPosition);
-        this.angle = geometry.calculateAngle(this, previousPosition);
-        if (this.speed <= 0.01) {
-            this.dead = true;
-        }
-        this.notifyPositionChangedListeners();
+       this.afterStep();
     }
 };
 
 module.exports = Stalker;
 
-},{"../geometry":4,"./PhysicsPointer":6}],9:[function(require,module,exports){
+},{"./PhysicsPointer":6}],9:[function(require,module,exports){
 var PhysicsPointer = require("./PhysicsPointer");
-var geometry = require("../geometry");
 
-Swinger.prototype = new PhysicsPointer();
+Swinger.prototype = new PhysicsPointer(0, 0);
 function Swinger() {
     PhysicsPointer.apply(this, arguments);
     this.velocity = [0, 0];
@@ -267,7 +281,7 @@ function Swinger() {
 }
 
 Swinger.prototype.step = function() {
-    var previousPosition = [this[0], this[1]];
+    this.beforeStep();
 
     if (!this.dead) {
         var dx = this.target[0] - this[0];
@@ -281,18 +295,13 @@ Swinger.prototype.step = function() {
         this[0] += this.velocity[0];
         this[1] += this.velocity[1];
 
-        this.speed = geometry.calculateDistance(this, previousPosition);
-        this.angle = geometry.calculateAngle(this, previousPosition);
-        if (this.speed <= 0.01) {
-            this.dead = true;
-        }
-        this.notifyPositionChangedListeners();
+        this.afterStep();
     }
 };
 
 module.exports = Swinger;
 
-},{"../geometry":4,"./PhysicsPointer":6}],10:[function(require,module,exports){
+},{"./PhysicsPointer":6}],10:[function(require,module,exports){
 var copyAttributesToObject = require("../util").copyAttributesToObject;
 var Pointer = require("../Pointer");
 
