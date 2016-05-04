@@ -5,7 +5,7 @@ function Slider() {
     PhysicsPointer.apply(this, arguments);
     this.velocity = [0, 0];
     // empirically chosen value
-    this.friction = .987;
+    this.friction = 0.987;
     this.scale = 0.01;
 }
 

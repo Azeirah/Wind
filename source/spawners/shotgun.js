@@ -1,3 +1,6 @@
+var Pointer = require("../Pointer");
+var copyAttributesToObject = require("..util").copyAttributesToObject;
+
 function shotgun(pointer, ctx) {
     var shots = [];
 

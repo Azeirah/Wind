@@ -4,7 +4,7 @@ Swinger.prototype = new PhysicsPointer(0, 0);
 function Swinger() {
     PhysicsPointer.apply(this, arguments);
     this.velocity = [0, 0];
-    this.friction = .998;
+    this.friction = 0.998;
     this.scale = 0.01;
 }
 

@@ -1,0 +1,1745 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"mosuedo",
+				"mousedownEvent"
+			],
+			[
+				"moused",
+				"mousedownEvent"
+			],
+			[
+				"inputc",
+				"inputCtx"
+			],
+			[
+				"calcu",
+				"calculateAngle	(util.js)"
+			],
+			[
+				"shaw",
+				"shadowLength"
+			],
+			[
+				"cleint",
+				"clientY"
+			],
+			[
+				"MPPT",
+				"MPPT_VOLTAGE"
+			],
+			[
+				"inti",
+				"initializeShiftRegister"
+			],
+			[
+				"outPUt",
+				"outputEnable"
+			],
+			[
+				"PhysicsE",
+				"PhysicsEngine	(PhysicsEngine.js)"
+			],
+			[
+				"Phs",
+				"PhysicsEngine"
+			],
+			[
+				"natu",
+				"naturalHeight"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"offsc",
+				"offscreen"
+			],
+			[
+				"NS",
+				"NS_ERROR_NOT_AVAILABLE"
+			],
+			[
+				"synch",
+				"synchroniserUI"
+			],
+			[
+				"Sync",
+				"SynchroniserView	(save-view.js)"
+			],
+			[
+				"create",
+				"createImageData	(infinite-canvas.js)"
+			],
+			[
+				"middl",
+				"middleOrRightIsDown"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "\n\n\nWriting, let's get started.\n\nToday, on my mind is the question, why are my two emails being ignored. The one I sent to Bret, the other I sent to Joe.\nI'd like to work with these people, and I am very interested in their work.\n\nJoe mentioned he's looking for collaborators for his new Livable Media Lab.\nI'd love to help! Yet he's not responding.\n\nPerhaps poor Joe is busy, setting up his Lab. Perhaps my mail title is not catchy or clickbaity enough, as that would certainly be the right way to approach the anti-attention economist.\n\nNormally, I'm quite ok with my emails being ignored, but now it is by two influential people that I'd love to help. Should I resend the email?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnyway, I wanted to practice a different kind of writing here, I did not come here for introspection.\n\n\n\nThe great, blue wale.\n\nIn the ocean, many strange creatures swim around, living their hard, but simple lives. None of them are seeking to fullfill their dreams, never heard of a fish protest for equality, nor saw an octopus aspiring to build a company.\n\nPerhaps, these creatures are not so strange after all. Some of them float, some stick and some may hide, but I suspect that after all, most of them swim. These creatures call home this place we call sea.\n\nYou know, perhaps these creatures aren't so strange after all. These creatures do what they were born to do, and that is eating, sleep and survive to mate.\n\nAre we any different?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA little coin\n\nSome decisions in life are better left to the flip of a coin. Coins have no conscience, nor do they pick a side.\n\nAfter a few years of flipping these coins, I came accross one that I liked a little more over the others.\nIt was a small, fifty-cent coin.\n\nI liked it more not because it was special, but because it made the right decision.\n\nOh how do I hate that I can never tell this little coin apart from the other fifty-cent coin, the one that did me harm.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPerhaps they are the same coin?\n\nI like this kind of writing, it's light, somewhat poetic, and tries to describe something, anything.\n\nI don't really want to explain the second one, I like the idea too much to explain it, even to myself, although I do understand it x].\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+			"settings":
+			{
+				"buffer_size": 2449,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "1. remove new keyword from creating cursors\n2. Allow both setTarget([x, y]) and setTarget(x, y) notation",
+			"settings":
+			{
+				"buffer_size": 104,
+				"line_ending": "Unix",
+				"name": "1. remove new keyword from creating cursors"
+			}
+		},
+		{
+			"file": "demo.js",
+			"settings":
+			{
+				"buffer_size": 3682,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "source/pointers/Slider.js",
+			"settings":
+			{
+				"buffer_size": 801,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "source/pointers/Stalker.js",
+			"settings":
+			{
+				"buffer_size": 521,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "source/spawners/shotgun.js",
+			"settings":
+			{
+				"buffer_size": 766,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "source/spawners/mirror.js",
+			"settings":
+			{
+				"buffer_size": 1760,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "index.js",
+			"settings":
+			{
+				"buffer_size": 329,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 339.0,
+		"last_filter": "remove",
+		"selected_items":
+		[
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"jshintsetp",
+				"JSHint: Set Plugin Options"
+			],
+			[
+				"jshint",
+				"JSHint"
+			],
+			[
+				"jshin",
+				"JSHint"
+			],
+			[
+				"jsh",
+				"JSHint"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"lint",
+				"SublimeLinter: Next Error"
+			],
+			[
+				"jpm",
+				"tern_for_sublime: Jump to Definition"
+			],
+			[
+				"key",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"jpmd",
+				"tern_for_sublime: Jump to Definition"
+			],
+			[
+				"jumpto",
+				"tern_for_sublime: Jump to Definition"
+			],
+			[
+				"tern",
+				"tern_for_sublime: Select Variable"
+			],
+			[
+				"js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"python",
+				"SublimeREPL: Python"
+			],
+			[
+				"theme",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"preferences",
+				"Preferences: Settings - User"
+			],
+			[
+				"gitstat",
+				"Git: Status"
+			],
+			[
+				"git status",
+				"Git: Status"
+			],
+			[
+				"git commit",
+				"Git: Commit"
+			],
+			[
+				"git add",
+				"Git: Add..."
+			],
+			[
+				"git add all",
+				"Git: Add All"
+			],
+			[
+				"git curr",
+				"Git: Show Current File"
+			],
+			[
+				"git current",
+				"Git: Diff Current File"
+			],
+			[
+				"git h",
+				"Git: Commit history"
+			],
+			[
+				"beaut",
+				"HTMLBeautify"
+			],
+			[
+				"node",
+				"SublimeREPL: Node"
+			],
+			[
+				"below",
+				"Origami: Create Pane Below"
+			],
+			[
+				"dcp",
+				"Origami: Destroy Current Pane"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"orcpb",
+				"Origami: Create Pane Below"
+			],
+			[
+				"beautify",
+				"HTMLBeautify"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			],
+			[
+				"c++",
+				"Set Syntax: C++"
+			],
+			[
+				"mard",
+				"Set Syntax: Markdown"
+			],
+			[
+				"gitdiff",
+				"Git: Diff All Files"
+			],
+			[
+				"for",
+				"Format: Javascript"
+			],
+			[
+				"hex",
+				"Hex Viewer: Toggle Hex View"
+			],
+			[
+				"git diff cu",
+				"Git: Diff Current File"
+			],
+			[
+				"assem",
+				"Set Syntax: ARM Assembly"
+			],
+			[
+				"asm",
+				"Set Syntax: ARM Assembly"
+			],
+			[
+				"diffcu",
+				"Git: Diff Current File"
+			],
+			[
+				"git diff",
+				"Git: Diff Tool All"
+			],
+			[
+				"git dif",
+				"Git: Diff All Files"
+			],
+			[
+				": ",
+				"Snippet: std::map"
+			],
+			[
+				"rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"format",
+				"Format: Javascript"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"isntall",
+				"Package Control: Install Package"
+			],
+			[
+				"live",
+				"Snippet: Insert livereload.js script"
+			],
+			[
+				"enable",
+				"LiveReload: Enable/disable plug-ins"
+			],
+			[
+				"LiveReload: Enable/disable plugins",
+				"LiveReload: Enable/disable plug-ins"
+			],
+			[
+				"j",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 575.0
+	},
+	"console":
+	{
+		"height": 364.0,
+		"history":
+		[
+			"sublime.log_commands(True)",
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/az/Documents/js-stuff/wind",
+		"/home/az/Documents/js-stuff/wind/source",
+		"/home/az/Documents/js-stuff/wind/source/pointers",
+		"/home/az/Documents/js-stuff/wind/source/spawners"
+	],
+	"file_history":
+	[
+		"/home/az/.config/sublime-text-3/Packages/JSHint Gutter/.jshintrc",
+		"/home/az/.config/sublime-text-3/Packages/JSHint Gutter/JSHint.sublime-settings",
+		"/home/az/Documents/js-stuff/wind/source/pointers/Swinger.js",
+		"/home/az/Documents/js-stuff/wind/wind.sublime-project",
+		"/home/az/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/az/Documents/js-stuff/wind/dist/wind.js",
+		"/home/az/Documents/js-stuff/wind/source/pointers/Cursor.js",
+		"/home/az/Documents/js-stuff/wind/source/pointers/PhysicsPointer.js",
+		"/home/az/Documents/js-stuff/wind/source/pointers/Stalker.js",
+		"/home/az/Documents/js-stuff/wind/package.json",
+		"/home/az/Documents/js-stuff/wind/source/geometry.js",
+		"/home/az/Documents/js-stuff/wind/index.js",
+		"/home/az/Documents/js-stuff/wind/source/util.js",
+		"/home/az/Documents/js-stuff/wind/source/pointers/Slider.js",
+		"/home/az/Documents/js-stuff/wind/source/PointerManager.js",
+		"/home/az/Documents/js-stuff/wind/source/Pointer.js",
+		"/home/az/.config/sublime-text-3/Packages/User/Tern.sublime-keymap",
+		"/home/az/.config/sublime-text-3/Packages/tern_for_sublime/Default.sublime-keymap",
+		"/home/az/.config/sublime-text-3/Packages/tern_for_sublime/Tern.sublime-keymap",
+		"/home/az/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/az/Documents/js-stuff/wind-explorer/index.html",
+		"/home/az/Documents/js-stuff/wind-explorer/main.js",
+		"/home/az/Documents/js-stuff/wind-explorer/node_modules/az-wind/dist/wind.js",
+		"/home/az/Documents/js-stuff/wind-explorer/node_modules/az-wind/source/geometry.js",
+		"/home/az/Documents/js-stuff/wind-explorer/node_modules/az-wind/source/pointers/Slider.js",
+		"/home/az/Documents/js-stuff/wind-explorer/node_modules/az-wind/source/pointers/Stalker.js",
+		"/home/az/Documents/js-stuff/wind-explorer/node_modules/az-wind/source/pointers/Swinger.js",
+		"/home/az/Documents/js-stuff/dragEvent.js",
+		"/home/az/Documents/js-stuff/wind/demo.js",
+		"/home/az/Documents/js-stuff/wind/readme.md",
+		"/home/az/Documents/js-stuff/wind/index.html",
+		"/home/az/Documents/js-stuff/wind/source/pointers/Follower.js",
+		"/home/az/Documents/js-stuff/wind/source/spawners/mirror.js",
+		"/home/az/Documents/js-stuff/wind/source/spawners/shotgun.js",
+		"/home/az/Documents/js-stuff/phsyicsDrawing/source/Arrow.js",
+		"/home/az/Documents/js-stuff/phsyicsDrawing/source/Grid.js",
+		"/home/az/Documents/js-stuff/phsyicsDrawing/lib/Math-extensions.js",
+		"/home/az/Documents/js-stuff/phsyicsDrawing/pointers/source/Pointer.js",
+		"/home/az/Documents/js-stuff/phsyicsDrawing/pointers/source/main.js",
+		"/home/az/Documents/js-stuff/phsyicsDrawing/pointers/index.html",
+		"/var/www/martijnbrekelmans.com/SMG/smg.css",
+		"/var/www/martijnbrekelmans.com/SMG/index.html",
+		"/var/www/martijnbrekelmans.com/sftp-config.json",
+		"/etc/apache2/sites-enabled/devmartijnbrekelmans.com.conf",
+		"/etc/hosts",
+		"/home/az/.config/sublime-text-3/Packages/User/SFTP.errors.log",
+		"/home/az/Documents/school/solarTreeSoftware/selectMPPT.py",
+		"/home/az/Documents/administratie/aangiftes/streamsoft-aangifte-btw-2015-paypal/2015.py",
+		"/run/user/1000/gvfs/sftp:host=192.168.100.1,user=ubuntu/home/ubuntu/pcduino-tests/source/mpptVoltageTest.cpp",
+		"/run/user/1000/gvfs/sftp:host=192.168.100.1,user=ubuntu/home/ubuntu/pcduino-tests/source/spiTest.cpp",
+		"/run/user/1000/gvfs/sftp:host=192.168.100.1,user=ubuntu/home/ubuntu/pcduino-tests/source/mpptCurrentTest.cpp",
+		"/run/user/1000/gvfs/sftp:host=192.168.100.1,user=ubuntu/home/ubuntu/pcduino-tests/Makefile",
+		"/home/az/Documents/js-stuff/phsyicsDrawing/source/index.js",
+		"/home/az/Documents/js-stuff/phsyicsDrawing/index.html",
+		"/home/az/Documents/js-stuff/wind/source/readme.md",
+		"/home/az/Documents/school/solarTreeSoftware/pcduino-tests/source/mpptVoltageTest.cpp",
+		"/home/az/Documents/school/vsr/vsr jos/forward-engineer.sql",
+		"/run/user/1000/gvfs/sftp:host=192.168.100.1,user=ubuntu/home/ubuntu/pcduino-tests/source/gpio.cpp",
+		"/run/user/1000/gvfs/sftp:host=192.168.100.1,user=ubuntu/home/ubuntu/pcduino-tests/source/gpio.h",
+		"/run/user/1000/gvfs/sftp:host=192.168.100.1,user=ubuntu/home/ubuntu/pcduino-tests/source/gpioTest.cpp",
+		"/run/user/1000/gvfs/sftp:host=192.168.100.1,user=ubuntu/home/ubuntu/pcduino-tests/source/shiftregisterTest.cpp",
+		"/run/user/1000/gvfs/sftp:host=192.168.100.1,user=ubuntu/home/ubuntu/readMPPT/solar.cpp",
+		"/home/az/Documents/administratie/landen/perMonth.py",
+		"/home/az/Documents/administratie/landen/payments.csv",
+		"/home/az/Documents/school/solarTreeSoftware/pcduino-tests/Makefile",
+		"/home/az/Documents/school/solarTreeSoftware/pcduino-tests/source/shiftregisterTest.cpp",
+		"/home/az/Documents/school/solarTreeSoftware/pcduino-tests/readme.md",
+		"/run/user/1000/gvfs/sftp:host=192.168.100.1,user=ubuntu/home/ubuntu/readMPPT/spiTest.cpp",
+		"/run/user/1000/gvfs/sftp:host=192.168.100.1,user=ubuntu/home/ubuntu/readMPPT/gpiotest.cpp",
+		"/home/az/Documents/administratie/landen/summarize.py",
+		"/home/az/Documents/wind/source/readme.md",
+		"/home/az/Documents/administratie/aangiftes/aangifte-2015/landen/overzicht-landen.txt",
+		"/home/az/Documents/administratie/aangiftes/aangifte-2015/landen/payments.csv",
+		"/home/az/Documents/administratie/landen/overzicht-landen.txt",
+		"/home/az/Documents/administratie/landen/landen.csv",
+		"/home/az/Documents/administratie/landen/countries.py",
+		"/home/az/Documents/phsyicsDrawing/pointers/source/pointers/Stalker.js",
+		"/home/az/Documents/phsyicsDrawing/pointers/source/PointerManager.js",
+		"/home/az/Documents/phsyicsDrawing/pointers/source/main.js",
+		"/home/az/Documents/phsyicsDrawing/pointers/index.html",
+		"/home/az/Documents/phsyicsDrawing/pointers/source/pointers/Swinger.js",
+		"/home/az/Documents/phsyicsDrawing/source/Stalker.js",
+		"/home/az/Documents/phsyicsDrawing/source/Swinger.js",
+		"/home/az/Documents/phsyicsDrawing/pointers/source/Pointer.js",
+		"/home/az/Documents/phsyicsDrawing/pointers/source/pointers/PhysicsPointer.js",
+		"/home/az/Documents/phsyicsDrawing/pointers/source/PhysicsEngine.js",
+		"/home/az/Documents/dsb2/les1.md",
+		"/home/az/Documents/phsyicsDrawing/pointers/lib/Math-extensions.js",
+		"/home/az/Documents/administratie/summarize.py",
+		"/home/az/Documents/phsyicsDrawing/lib/Math-extensions.js",
+		"/home/az/Documents/phsyicsDrawing/pointers/source/pointers/Follower.js",
+		"/home/az/Documents/phsyicsDrawing/source/index.js",
+		"/home/az/Documents/phsyicsDrawing/source/PhysicsEntity.js",
+		"/home/az/Documents/phsyicsDrawing/index.html",
+		"/home/az/Documents/phsyicsDrawing/pointers/source/pointers/PhysicsEngine.js",
+		"/home/az/Documents/phsyicsDrawing/source/Pointer.js",
+		"/home/az/Documents/phsyicsDrawing/source/pointers/Follower.js",
+		"/home/az/Documents/phsyicsDrawing/source/Grid.js",
+		"/home/az/Documents/phsyicsDrawing/source/Brush.js",
+		"/home/az/Documents/phsyicsDrawing/source/BrushManager.js",
+		"/home/az/Documents/phsyicsDrawing/lib/strFormat.js",
+		"/home/az/Documents/phsyicsDrawing/source/Arrow.js",
+		"/home/az/Documents/Solar tree/Solar tree/2. Uitvoering/2.2 Eindproduct/2.2.1 Webserver/Backup code/10-06-2015/solar.c",
+		"/var/www/solartree/solar/application/controllers/solar.php",
+		"/home/az/Documents/music/play.sh",
+		"/home/az/Documents/music/mu.py",
+		"/var/www/solartree/application/models/msolar.php",
+		"/home/az/.bashrc",
+		"/run/user/1000/gvfs/sftp:host=192.168.100.1,user=ubuntu/home/ubuntu/Desktop/solardb.sql",
+		"/var/www/solartree/application/controllers/solar.php",
+		"/var/www/solartree/solar/application/models/msolar.php",
+		"/var/www/solartree/solar/system/libraries/Session.php",
+		"/var/www/solartree/system/libraries/Migration.php",
+		"/var/www/solartree/solar/system/libraries/Migration.php",
+		"/var/www/solartree/application/views/home.php",
+		"/media/az/PHILIPS UFD/solar.php",
+		"/var/www/solartree/application/index.html",
+		"/var/www/solartree/readme.md",
+		"/home/az/Documents/solarTreeSoftware/readMPPT/Makefile",
+		"/home/az/Documents/solarTreeSoftware/readMPPT/solar.c",
+		"/var/www/solartree/application/models/index.html",
+		"/home/az/Documents/solarTreeSoftware/readMPPT/Makefil",
+		"/home/az/Documents/Solar tree/Solar tree/2. Uitvoering/2.2 Eindproduct/2.2.1 Webserver/Backup code/10-06-2015/solardb.sql",
+		"/home/az/Documents/OOP-logic-simulator/src/Nodes/LogicGate.cpp",
+		"/home/az/Documents/OOP-logic-simulator/src/Node.cpp",
+		"/home/az/Documents/small-multiples/index.html",
+		"/home/az/Documents/small-multiples/readme.md",
+		"/home/az/Documents/small-multiples/smallMultiples.js"
+	],
+	"find":
+	{
+		"height": 70.0
+	},
+	"find_in_files":
+	{
+		"height": 161.0,
+		"where_history":
+		[
+			"*.js",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"//@flow\\n",
+			"//@flow",
+			"ctrl",
+			"alt",
+			"ValueError",
+			"calculateSpeed",
+			"dead",
+			"offset",
+			"offsetX",
+			"drawCtx",
+			"event",
+			"mousedownEvent",
+			"event",
+			"dragEvent",
+			"explorer",
+			"Swinger",
+			"theme",
+			"\":",
+			"inputCtx",
+			"drawingCanvas",
+			"width",
+			"canvas",
+			"Follower",
+			"follower",
+			"Follower",
+			"\nFollower",
+			":",
+			"require",
+			"index",
+			"mirror",
+			"Follower",
+			"Pointer",
+			"PointerManager",
+			"engine",
+			"};",
+			"calculateAngle",
+			"this.speed =",
+			"previousPosition",
+			"currentPosition",
+			"lastPosition",
+			"0",
+			"this",
+			"ratio",
+			"position",
+			"this",
+			"s",
+			"floor",
+			"this",
+			"event",
+			"y",
+			"x",
+			"15",
+			"50",
+			"ceil",
+			"ctx",
+			", ",
+			"password",
+			"username",
+			"origin",
+			"pointer)",
+			"prototype",
+			"square",
+			"Math.square",
+			"ctx.canvas.height",
+			"ctx.canvas.width",
+			"(pointer)",
+			"pointer",
+			"Voltage",
+			"initializeMPPT",
+			"8",
+			"seem",
+			"voltage",
+			"getVoltage",
+			"MPPT",
+			"selectMPPT",
+			"selectMPPTForShiftRegister",
+			"byte",
+			" ",
+			"which",
+			"console",
+			"#",
+			"90",
+			"30",
+			"this",
+			"shotPoints",
+			"shot",
+			"notifyPositionChangedListeners",
+			"xtc",
+			"0",
+			"engine",
+			"});",
+			"position",
+			"wind",
+			"position",
+			"!-- relie",
+			"<!-- relie",
+			"position",
+			"Swinger",
+			"script",
+			"PhysicsPointer",
+			"sendValueToShiftRegister",
+			"HIGH",
+			"LOW",
+			"HIGH",
+			"OUTPUT",
+			"bcdToDec",
+			"decToBcd",
+			"num",
+			"whichMPPT",
+			"int",
+			"shiftByte",
+			"byte",
+			"string",
+			"void",
+			"1",
+			"Q ",
+			"7",
+			"HIGH",
+			"pinMode",
+			"digitalWrite",
+			"LOW",
+			"clock",
+			"high",
+			"HIGH",
+			"PIN",
+			"pin",
+			"PIN",
+			"pinMode"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"",
+			"calculateDistance",
+			"sublime-text",
+			"sublime_text"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2449,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1072,
+								1072
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_name": "",
+							"bh_regions":
+							[
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"incomplete_sync": null,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 543.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 104,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								104,
+								104
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_name": "1. remove new keyword from creating cursors",
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"incomplete_sync": null,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "demo.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3682,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								26,
+								26
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "source/pointers/Slider.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 801,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								270,
+								270
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "source/pointers/Stalker.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 521,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								114,
+								114
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "source/spawners/shotgun.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 766,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								138,
+								138
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "source/spawners/mirror.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1760,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1252,
+								1252
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 891.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "index.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 329,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								329,
+								329
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 41.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 175.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 134.0
+	},
+	"output.hex_viewer_inspector":
+	{
+		"height": 146.0
+	},
+	"output.sftp":
+	{
+		"height": 158.0
+	},
+	"pinned_build_system": "",
+	"project": "wind.sublime-project",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"geomte",
+				"wind/source/geometry.js"
+			],
+			[
+				"index.tml",
+				"index.html"
+			],
+			[
+				"index.js",
+				"index.js"
+			],
+			[
+				"index.html",
+				"index.html"
+			],
+			[
+				"wind.js",
+				"dist/wind.js"
+			],
+			[
+				"mirro",
+				"source/spawners/mirror.js"
+			],
+			[
+				"phy",
+				"source/pointers/PhysicsPointer.js"
+			],
+			[
+				"pm",
+				"source/PointerManager.js"
+			],
+			[
+				"util",
+				"source/util.js"
+			],
+			[
+				"swinger",
+				"source/pointers/Swinger.js"
+			],
+			[
+				"index",
+				"index.html"
+			],
+			[
+				"smg/.css",
+				"martijnbrekelmans.com/SMG/smg.css"
+			],
+			[
+				"mirror",
+				"source/spawners/mirror.js"
+			],
+			[
+				"slider",
+				"source/pointers/Slider.js"
+			],
+			[
+				"swigner",
+				"source/pointers/Swinger.js"
+			],
+			[
+				"ind",
+				"index.html"
+			],
+			[
+				"ream",
+				"source/readme.md"
+			],
+			[
+				"readme",
+				"~/Documents/wind/source/readme.md"
+			],
+			[
+				"stalker",
+				"pointers/source/pointers/Stalker.js"
+			],
+			[
+				"main.js",
+				"pointers/source/main.js"
+			],
+			[
+				"stalker.js",
+				"pointers/source/pointers/Stalker.js"
+			],
+			[
+				"math-",
+				"pointers/lib/Math-extensions.js"
+			],
+			[
+				"math-ex",
+				"lib/Math-extensions.js"
+			],
+			[
+				"phsp",
+				"pointers/source/pointers/PhysicsPointer.js"
+			],
+			[
+				"pointer.js",
+				"pointers/source/Pointer.js"
+			],
+			[
+				"physip",
+				"pointers/source/pointers/PhysicsPointer.js"
+			],
+			[
+				"physicsegn",
+				"pointers/source/PhysicsEngine.js"
+			],
+			[
+				"physiceng",
+				"pointers/source/PhysicsEngine.js"
+			],
+			[
+				"math",
+				"pointers/lib/Math-extensions.js"
+			],
+			[
+				"phys",
+				"source/PhysicsEntity.js"
+			],
+			[
+				"follower",
+				"pointers/source/pointers/Follower.js"
+			],
+			[
+				"grid",
+				"source/Grid.js"
+			],
+			[
+				"brushm",
+				"source/BrushManager.js"
+			],
+			[
+				"indexhtml",
+				"index.html"
+			],
+			[
+				"msolar",
+				"application/models/msolar.php"
+			],
+			[
+				"pars",
+				"OOP-logic-simulator/src/Parser.cpp"
+			],
+			[
+				"sync.js",
+				"a-painters-dream/source/synchroniser.js"
+			],
+			[
+				"save.php",
+				"a-painters-dream/save.php"
+			],
+			[
+				"save.js",
+				"a-painters-dream/source/save.js"
+			],
+			[
+				"parser",
+				"OOP-logic-simulator/src/Parser.cpp"
+			],
+			[
+				"mai",
+				"OOP-logic-simulator/src/main.cpp"
+			],
+			[
+				"probe",
+				"OOP-logic-simulator/src/Nodes/Gates/ProbeGate.cpp"
+			],
+			[
+				"main",
+				"OOP-logic-simulator/src/main.cpp"
+			],
+			[
+				"test.t",
+				"OOP-logic-simulator/test.txt"
+			],
+			[
+				"node",
+				"OOP-logic-simulator/src/Node.cpp"
+			],
+			[
+				"prob",
+				"OOP-logic-simulator/src/Nodes/Gates/ProbeGate.cpp"
+			],
+			[
+				"nor",
+				"OOP-logic-simulator/src/Nodes/Gates/NorGate.h"
+			],
+			[
+				"nandg",
+				"OOP-logic-simulator/src/Nodes/Gates/NandGate.h"
+			],
+			[
+				"node.h",
+				"OOP-logic-simulator/src/Node.h"
+			],
+			[
+				"andgate",
+				"OOP-logic-simulator/src/Nodes/Gates/AndGate.h"
+			],
+			[
+				"inpulo",
+				"OOP-logic-simulator/src/Nodes/Gates/InputLowGate.cpp"
+			],
+			[
+				"nde.h",
+				"OOP-logic-simulator/src/Node.h"
+			],
+			[
+				"infini",
+				"infinite-canvas/infinite-canvas.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 189.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

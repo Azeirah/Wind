@@ -1,7 +1,7 @@
 var PhysicsPointer = require("./PhysicsPointer");
 
 Stalker.prototype = new PhysicsPointer(0, 0);
-function Stalker(ctx) {
+function Stalker() {
     PhysicsPointer.apply(this, arguments);
     this.stepSize = 0.05;
     this.speed = 0;
