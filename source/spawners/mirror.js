@@ -2,7 +2,7 @@ var copyAttributesToObject = require("../util").copyAttributesToObject;
 var Pointer = require("../Pointer");
 
 function _mirrorHorizontal(pointer, origin) {
-    var p1 = new Pointer();
+    var p1 = new Pointer(pointer[0], pointer[1]);
     p1.setDrawingFunction(pointer.drawFn);
     pointer.onPositionChanged(function () {
         copyAttributesToObject(pointer, p1);
@@ -13,7 +13,7 @@ function _mirrorHorizontal(pointer, origin) {
 }
 
 function _mirrorVertical(pointer, origin) {
-    var p1 = new Pointer();
+    var p1 = new Pointer(pointer[0], pointer[1]);
     p1.setDrawingFunction(pointer.drawFn);
     pointer.onPositionChanged(function () {
         copyAttributesToObject(pointer, p1);
@@ -24,7 +24,7 @@ function _mirrorVertical(pointer, origin) {
 }
 
 function _mirrorDiagonal(pointer, origin) {
-    var p1 = new Pointer();
+    var p1 = new Pointer(pointer[0], pointer[1]);
     p1.setDrawingFunction(pointer.drawFn);
     pointer.onPositionChanged(function () {
         copyAttributesToObject(pointer, p1);
@@ -34,6 +34,19 @@ function _mirrorDiagonal(pointer, origin) {
     });
 }
 
+/**
+ * Mirror takes a pointer and mirrors it in configurable ways.
+ *
+ * @param  {Pointer} pointer The pointer you want to mirror
+ * @param  {string}  how     "horizontal" | "vertical" | "diagonal" | "4-way"
+ * @param  {[x, y]}  origin  where to mirror from, by default you get a kaleidoscope effect
+ *                           otherwise, you likely want to input the pointer's origin here
+ *                           to get a local mirror effect
+ *
+ * examples:
+ * mirror(pointer, "horizontal") // horizontal kaleidoscope
+ * mirror(pointer, "diagonal", [pointer[0], pointer[1]]) // local diagonal mirroring
+ */
 function mirror(pointer, how, origin) {
     if (!origin) {
         origin = [ctx.canvas.width / 2, ctx.canvas.height / 2];
