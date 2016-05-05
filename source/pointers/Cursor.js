@@ -9,17 +9,22 @@ function Cursor() {
     var cursor = this;
     Pointer.apply(this, arguments);
 
-    document.body.addEventListener("az-dragStart", function (event) {
+    function update (event) {
         cursor[0] = event.clientX;
         cursor[1] = event.clientY;
         cursor.notifyPositionChangedListeners();
-    });
+    }
 
-    document.body.addEventListener("az-drag", function (event) {
-       cursor[0] = event.clientX;
-       cursor[1] = event.clientY;
-       cursor.notifyPositionChangedListeners();
-   });
+    // keep reference so it can later be cleaned up
+    cursor._update = update;
+
+    document.body.addEventListener("az-dragStart", update);
+    document.body.addEventListener("az-drag", update);
 }
+
+Cursor.prototype.destruct = function () {
+    document.body.removeEventListener("az-dragStart", this._update);
+    document.body.removeEventListener("az-drag", this._update);
+};
 
 module.exports = Cursor;
