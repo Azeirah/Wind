@@ -149,18 +149,23 @@ function Cursor() {
     var cursor = this;
     Pointer.apply(this, arguments);
 
-    document.body.addEventListener("az-dragStart", function (event) {
+    function update (event) {
         cursor[0] = event.clientX;
         cursor[1] = event.clientY;
         cursor.notifyPositionChangedListeners();
-    });
+    }
 
-    document.body.addEventListener("az-drag", function (event) {
-       cursor[0] = event.clientX;
-       cursor[1] = event.clientY;
-       cursor.notifyPositionChangedListeners();
-   });
+    // keep reference so it can later be cleaned up
+    cursor._update = update;
+
+    document.body.addEventListener("az-dragStart", update);
+    document.body.addEventListener("az-drag", update);
 }
+
+Cursor.prototype.destruct = function () {
+    document.body.removeEventListener("az-dragStart", this._update);
+    document.body.removeEventListener("az-drag", this._update);
+};
 
 module.exports = Cursor;
 
@@ -215,7 +220,7 @@ function Slider() {
     PhysicsPointer.apply(this, arguments);
     this.velocity = [0, 0];
     // empirically chosen value
-    this.friction = .987;
+    this.friction = 0.987;
     this.scale = 0.01;
 }
 
@@ -247,7 +252,7 @@ module.exports = Slider;
 var PhysicsPointer = require("./PhysicsPointer");
 
 Stalker.prototype = new PhysicsPointer(0, 0);
-function Stalker(ctx) {
+function Stalker() {
     PhysicsPointer.apply(this, arguments);
     this.stepSize = 0.05;
     this.speed = 0;
@@ -276,7 +281,7 @@ Swinger.prototype = new PhysicsPointer(0, 0);
 function Swinger() {
     PhysicsPointer.apply(this, arguments);
     this.velocity = [0, 0];
-    this.friction = .998;
+    this.friction = 0.998;
     this.scale = 0.01;
 }
 
@@ -306,7 +311,7 @@ var copyAttributesToObject = require("../util").copyAttributesToObject;
 var Pointer = require("../Pointer");
 
 function _mirrorHorizontal(pointer, origin) {
-    var p1 = new Pointer();
+    var p1 = new Pointer(pointer[0], pointer[1]);
     p1.setDrawingFunction(pointer.drawFn);
     pointer.onPositionChanged(function () {
         copyAttributesToObject(pointer, p1);
@@ -317,7 +322,7 @@ function _mirrorHorizontal(pointer, origin) {
 }
 
 function _mirrorVertical(pointer, origin) {
-    var p1 = new Pointer();
+    var p1 = new Pointer(pointer[0], pointer[1]);
     p1.setDrawingFunction(pointer.drawFn);
     pointer.onPositionChanged(function () {
         copyAttributesToObject(pointer, p1);
@@ -328,7 +333,7 @@ function _mirrorVertical(pointer, origin) {
 }
 
 function _mirrorDiagonal(pointer, origin) {
-    var p1 = new Pointer();
+    var p1 = new Pointer(pointer[0], pointer[1]);
     p1.setDrawingFunction(pointer.drawFn);
     pointer.onPositionChanged(function () {
         copyAttributesToObject(pointer, p1);
@@ -338,6 +343,19 @@ function _mirrorDiagonal(pointer, origin) {
     });
 }
 
+/**
+ * Mirror takes a pointer and mirrors it in configurable ways.
+ *
+ * @param  {Pointer} pointer The pointer you want to mirror
+ * @param  {string}  how     "horizontal" | "vertical" | "diagonal" | "4-way"
+ * @param  {[x, y]}  origin  where to mirror from, by default you get a kaleidoscope effect
+ *                           otherwise, you likely want to input the pointer's origin here
+ *                           to get a local mirror effect
+ *
+ * examples:
+ * mirror(pointer, "horizontal") // horizontal kaleidoscope
+ * mirror(pointer, "diagonal", [pointer[0], pointer[1]]) // local diagonal mirroring
+ */
 function mirror(pointer, how, origin) {
     if (!origin) {
         origin = [ctx.canvas.width / 2, ctx.canvas.height / 2];
