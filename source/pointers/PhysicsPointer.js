@@ -3,6 +3,15 @@ var geometry = require("../geometry");
 
 // this is an abstract class, treat it as such.
 PhysicsPointer.prototype = new Pointer(0, 0);
+/**
+ * Attributes
+ * @attribute target           {[x, y]} The target this pointer is using to calculate its next position
+ * @attribute previousPosition {[x, y]} The previous position of the pointer
+ * @attribute free             {bool}   True if it should respond to user-input, false otherwise
+ * @attribute dead             {bool}   Pointer won't move anymore when it is dead, you shouldn't have to set this yourself
+ * @attribute speed            {number} Current speed of the pointer
+ * @attribute angle            {number} The direction the pointer is currently going in in radians
+ */
 function PhysicsPointer() {
     Pointer.apply(this, arguments);
     this.target = [this[0], this[1]];
@@ -19,18 +28,17 @@ PhysicsPointer.prototype.step = function() {
 };
 
 PhysicsPointer.prototype.beforeStep = function () {
-    this._previousPosition = [this[0], this[1]];
+    this.previousPosition = [this[0], this[1]];
 };
 
 PhysicsPointer.prototype.afterStep = function after() {
-    if (! this._previousPosition) {
+    if (! this.previousPosition) {
         throw new ReferenceError("You've forgotten a `beforeStep` call in your step function");
     }
-    this.speed = geometry.calculateDistance(this, this._previousPosition);
-    this.angle = geometry.calculateAngle(this, this._previousPosition);
-    // determine if a pointer is dead by the following reasoning
-    // first, is the speed really low?
-    // then check, is the pointer free? then it has stopped moving
+
+    this.speed = geometry.calculateDistance(this, this.previousPosition);
+    this.angle = geometry.calculateAngle(this, this.previousPosition);
+
     if (this.speed <= 0.01 && this.free) {
         this.dead = true;
     } else {
