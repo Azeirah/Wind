@@ -175,6 +175,15 @@ var geometry = require("../geometry");
 
 // this is an abstract class, treat it as such.
 PhysicsPointer.prototype = new Pointer(0, 0);
+/**
+ * Attributes
+ * @attribute target           {[x, y]} The target this pointer is using to calculate its next position
+ * @attribute previousPosition {[x, y]} The previous position of the pointer
+ * @attribute free             {bool}   True if it should respond to user-input, false otherwise
+ * @attribute dead             {bool}   Pointer won't move anymore when it is dead, you shouldn't have to set this yourself
+ * @attribute speed            {number} Current speed of the pointer
+ * @attribute angle            {number} The direction the pointer is currently going in in radians
+ */
 function PhysicsPointer() {
     Pointer.apply(this, arguments);
     this.target = [this[0], this[1]];
@@ -191,18 +200,17 @@ PhysicsPointer.prototype.step = function() {
 };
 
 PhysicsPointer.prototype.beforeStep = function () {
-    this._previousPosition = [this[0], this[1]];
+    this.previousPosition = [this[0], this[1]];
 };
 
 PhysicsPointer.prototype.afterStep = function after() {
-    if (! this._previousPosition) {
+    if (! this.previousPosition) {
         throw new ReferenceError("You've forgotten a `beforeStep` call in your step function");
     }
-    this.speed = geometry.calculateDistance(this, this._previousPosition);
-    this.angle = geometry.calculateAngle(this, this._previousPosition);
-    // determine if a pointer is dead by the following reasoning
-    // first, is the speed really low?
-    // then check, is the pointer free? then it has stopped moving
+
+    this.speed = geometry.calculateDistance(this, this.previousPosition);
+    this.angle = geometry.calculateAngle(this, this.previousPosition);
+
     if (this.speed <= 0.01 && this.free) {
         this.dead = true;
     } else {
@@ -310,38 +318,42 @@ module.exports = Swinger;
 var copyAttributesToObject = require("../util").copyAttributesToObject;
 var Pointer = require("../Pointer");
 
-function _mirrorHorizontal(pointer, origin) {
-    var p1 = new Pointer(pointer[0], pointer[1]);
-    p1.setDrawingFunction(pointer.drawFn);
-    pointer.onPositionChanged(function () {
-        copyAttributesToObject(pointer, p1);
-        p1[0] = origin[0] + origin[0] - this[0];
-        p1[1] = this[1];
-        p1.drawFn();
-    });
+function _bootstrapMirror(fn) {
+    return function (originalPointer, origin) {
+        var copy = new Pointer(originalPointer[0], originalPointer[1]);
+        copy.setDrawingFunction(originalPointer.drawFn);
+
+        originalPointer.onPositionChanged(function () {
+            if (copy[0] !== undefined && copy[1] !== undefined) {
+                copy.previousPosition = [copy[0], copy[1]];
+            } else {
+                copy.previousPosition = [originalPointer[0], originalPointer[1]];
+            }
+            // position is calculated by the passed function
+            fn(copy, originalPointer, origin);
+            if (originalPointer.afterStep) {
+                originalPointer.afterStep.call(copy);
+            }
+            // copy.notifyPositionChangedListeners();
+            copy.drawFn();
+        });
+    };
 }
 
-function _mirrorVertical(pointer, origin) {
-    var p1 = new Pointer(pointer[0], pointer[1]);
-    p1.setDrawingFunction(pointer.drawFn);
-    pointer.onPositionChanged(function () {
-        copyAttributesToObject(pointer, p1);
-        p1[0] = this[0];
-        p1[1] = origin[1] + origin[1] - this[1];
-        p1.drawFn();
-    });
-}
+var _mirrorHorizontal = _bootstrapMirror(function (copy, originalPointer, origin) {
+    copy[0] = origin[0] + origin[0] - originalPointer[0];
+    copy[1] = originalPointer[1];
+});
 
-function _mirrorDiagonal(pointer, origin) {
-    var p1 = new Pointer(pointer[0], pointer[1]);
-    p1.setDrawingFunction(pointer.drawFn);
-    pointer.onPositionChanged(function () {
-        copyAttributesToObject(pointer, p1);
-        p1[0] = origin[0] + origin[0] - this[0];
-        p1[1] = origin[1] + origin[1] - this[1];
-        p1.drawFn();
-    });
-}
+var _mirrorVertical = _bootstrapMirror(function (copy, originalPointer, origin) {
+    copy[0] = originalPointer[0];
+    copy[1] = origin[1] + origin[1] - originalPointer[1];
+});
+
+var _mirrorDiagonal = _bootstrapMirror(function (copy, originalPointer, origin) {
+    copy[0] = origin[0] + origin[0] - originalPointer[0];
+    copy[1] = origin[1] + origin[1] - originalPointer[1];
+});
 
 /**
  * Mirror takes a pointer and mirrors it in configurable ways.
@@ -355,6 +367,9 @@ function _mirrorDiagonal(pointer, origin) {
  * examples:
  * mirror(pointer, "horizontal") // horizontal kaleidoscope
  * mirror(pointer, "diagonal", [pointer[0], pointer[1]]) // local diagonal mirroring
+ *
+ * All attributes of the original pointer are continuously copied to the mirrored pointer
+ * so speed and angle can be accessed from the mirror pointer.
  */
 function mirror(pointer, how, origin) {
     if (!origin) {
