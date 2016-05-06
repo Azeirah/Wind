@@ -1,38 +1,42 @@
 var copyAttributesToObject = require("../util").copyAttributesToObject;
 var Pointer = require("../Pointer");
 
-function _mirrorHorizontal(pointer, origin) {
-    var p1 = new Pointer(pointer[0], pointer[1]);
-    p1.setDrawingFunction(pointer.drawFn);
-    pointer.onPositionChanged(function () {
-        copyAttributesToObject(pointer, p1);
-        p1[0] = origin[0] + origin[0] - this[0];
-        p1[1] = this[1];
-        p1.drawFn();
-    });
+function _bootstrapMirror(fn) {
+    return function (originalPointer, origin) {
+        var copy = new Pointer(originalPointer[0], originalPointer[1]);
+        copy.setDrawingFunction(originalPointer.drawFn);
+
+        originalPointer.onPositionChanged(function () {
+            if (copy[0] !== undefined && copy[1] !== undefined) {
+                copy.previousPosition = [copy[0], copy[1]];
+            } else {
+                copy.previousPosition = [originalPointer[0], originalPointer[1]];
+            }
+            // position is calculated by the passed function
+            fn(copy, originalPointer, origin);
+            if (originalPointer.afterStep) {
+                originalPointer.afterStep.call(copy);
+            }
+            // copy.notifyPositionChangedListeners();
+            copy.drawFn();
+        });
+    };
 }
 
-function _mirrorVertical(pointer, origin) {
-    var p1 = new Pointer(pointer[0], pointer[1]);
-    p1.setDrawingFunction(pointer.drawFn);
-    pointer.onPositionChanged(function () {
-        copyAttributesToObject(pointer, p1);
-        p1[0] = this[0];
-        p1[1] = origin[1] + origin[1] - this[1];
-        p1.drawFn();
-    });
-}
+var _mirrorHorizontal = _bootstrapMirror(function (copy, originalPointer, origin) {
+    copy[0] = origin[0] + origin[0] - originalPointer[0];
+    copy[1] = originalPointer[1];
+});
 
-function _mirrorDiagonal(pointer, origin) {
-    var p1 = new Pointer(pointer[0], pointer[1]);
-    p1.setDrawingFunction(pointer.drawFn);
-    pointer.onPositionChanged(function () {
-        copyAttributesToObject(pointer, p1);
-        p1[0] = origin[0] + origin[0] - this[0];
-        p1[1] = origin[1] + origin[1] - this[1];
-        p1.drawFn();
-    });
-}
+var _mirrorVertical = _bootstrapMirror(function (copy, originalPointer, origin) {
+    copy[0] = originalPointer[0];
+    copy[1] = origin[1] + origin[1] - originalPointer[1];
+});
+
+var _mirrorDiagonal = _bootstrapMirror(function (copy, originalPointer, origin) {
+    copy[0] = origin[0] + origin[0] - originalPointer[0];
+    copy[1] = origin[1] + origin[1] - originalPointer[1];
+});
 
 /**
  * Mirror takes a pointer and mirrors it in configurable ways.
@@ -46,6 +50,9 @@ function _mirrorDiagonal(pointer, origin) {
  * examples:
  * mirror(pointer, "horizontal") // horizontal kaleidoscope
  * mirror(pointer, "diagonal", [pointer[0], pointer[1]]) // local diagonal mirroring
+ *
+ * All attributes of the original pointer are continuously copied to the mirrored pointer
+ * so speed and angle can be accessed from the mirror pointer.
  */
 function mirror(pointer, how, origin) {
     if (!origin) {
