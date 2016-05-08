@@ -1,41 +1,42 @@
-var copyAttributesToObject = require("../util").copyAttributesToObject;
 var Pointer = require("../Pointer");
 
 function _bootstrapMirror(fn) {
-    return function (originalPointer, origin) {
-        var copy = new Pointer(originalPointer[0], originalPointer[1]);
+    return function(originalPointer, origin) {
+        var initialPosition = fn(originalPointer, origin);
+        var copy = new Pointer(initialPosition[0], initialPosition[1]);
         copy.setDrawingFunction(originalPointer.drawFn);
 
-        originalPointer.onPositionChanged(function () {
+        originalPointer.onPositionChanged(function() {
             if (copy[0] !== undefined && copy[1] !== undefined) {
                 copy.previousPosition = [copy[0], copy[1]];
-            } else {
-                copy.previousPosition = [originalPointer[0], originalPointer[1]];
             }
+
             // position is calculated by the passed function
-            fn(copy, originalPointer, origin);
+            var newPosition = fn(originalPointer, origin);
+            copy[0] = newPosition[0];
+            copy[1] = newPosition[1];
+
             if (originalPointer.afterStep) {
                 originalPointer.afterStep.call(copy);
             }
-            // copy.notifyPositionChangedListeners();
             copy.drawFn();
         });
     };
 }
 
-var _mirrorHorizontal = _bootstrapMirror(function (copy, originalPointer, origin) {
-    copy[0] = origin[0] + origin[0] - originalPointer[0];
-    copy[1] = originalPointer[1];
+var _mirrorHorizontal = _bootstrapMirror(function(originalPointer, origin) {
+    return [origin[0] + origin[0] - originalPointer[0],
+            originalPointer[1]];
 });
 
-var _mirrorVertical = _bootstrapMirror(function (copy, originalPointer, origin) {
-    copy[0] = originalPointer[0];
-    copy[1] = origin[1] + origin[1] - originalPointer[1];
+var _mirrorVertical = _bootstrapMirror(function(originalPointer, origin) {
+    return [originalPointer[0],
+            origin[1] + origin[1] - originalPointer[1]];
 });
 
-var _mirrorDiagonal = _bootstrapMirror(function (copy, originalPointer, origin) {
-    copy[0] = origin[0] + origin[0] - originalPointer[0];
-    copy[1] = origin[1] + origin[1] - originalPointer[1];
+var _mirrorDiagonal = _bootstrapMirror(function(originalPointer, origin) {
+    return [origin[0] + origin[0] - originalPointer[0],
+            origin[1] + origin[1] - originalPointer[1]];
 });
 
 /**
