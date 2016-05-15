@@ -4,6 +4,8 @@ function _bootstrapMirror(fn) {
     return function(originalPointer, origin) {
         var initialPosition = fn(originalPointer, origin);
         var copy = new Pointer(initialPosition[0], initialPosition[1]);
+        copy.rotation = originalPointer.rotation;
+        copy.origin = origin;
         copy.setDrawingFunction(originalPointer.drawFn);
 
         originalPointer.onPositionChanged(function() {
@@ -25,18 +27,18 @@ function _bootstrapMirror(fn) {
 }
 
 var _mirrorHorizontal = _bootstrapMirror(function(originalPointer, origin) {
-    return [origin[0] + origin[0] - originalPointer[0],
-            originalPointer[1]];
+    return [origin[0] + origin[0] - originalPointer.x,
+            originalPointer.y];
 });
 
 var _mirrorVertical = _bootstrapMirror(function(originalPointer, origin) {
-    return [originalPointer[0],
-            origin[1] + origin[1] - originalPointer[1]];
+    return [originalPointer.x,
+            origin[1] + origin[1] - originalPointer.y];
 });
 
 var _mirrorDiagonal = _bootstrapMirror(function(originalPointer, origin) {
-    return [origin[0] + origin[0] - originalPointer[0],
-            origin[1] + origin[1] - originalPointer[1]];
+    return [origin[0] + origin[0] - originalPointer.x,
+            origin[1] + origin[1] - originalPointer.y];
 });
 
 /**

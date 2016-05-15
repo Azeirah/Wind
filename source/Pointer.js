@@ -17,7 +17,32 @@ function Pointer(x, y) {
 
     pointer[0] = x;
     pointer[1] = y;
+
+    pointer.origin = [x, y];
+
+    pointer.rotation = 0;
 }
+
+Object.defineProperties(Pointer.prototype, {
+    x: {
+        get: function () {
+            return this.origin[0] + (this[0] - this.origin[0]) * Math.cos(this.rotation) + (this[1] - this.origin[1]) * Math.sin(this.rotation);
+        }
+    },
+    y: {
+        get: function () {
+            return this.origin[1] + (this[0] - this.origin[0]) * Math.sin(this.rotation) + (this[1] - this.origin[1]) * Math.cos(this.rotation);
+        }
+    }
+})
+
+/**
+ * Set the rotation of the pointer
+ * @param {number} rotation An angle in radians
+ */
+Pointer.prototype.setRotation = function (rotation) {
+    this.rotation = rotation;
+};
 
 Pointer.prototype.setDrawingFunction = function (drawFn) {
     this.drawFn = drawFn;
