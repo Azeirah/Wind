@@ -241,8 +241,10 @@ function Cursor() {
     Pointer.apply(this, arguments);
 
     function update (event) {
+        cursor.beforeMove();
         cursor[0] = event.clientX;
         cursor[1] = event.clientY;
+        cursor.afterMove();
         cursor.notifyPositionChangedListeners();
     }
 
