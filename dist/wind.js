@@ -9,6 +9,22 @@ global.mirror = require("./source/spawners/mirror");
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./source/PointerManager":3,"./source/pointers/Cursor":5,"./source/pointers/Slider":7,"./source/pointers/Stalker":8,"./source/pointers/Swinger":9,"./source/spawners/mirror":10}],2:[function(require,module,exports){
+var geometry = require("./geometry");
+
+/**
+ * Base class for any pointer-like object
+ * @param {number} x Initial x position
+ * @param {number} y Initial y position
+ * @property {boolean} free A pointer is free whenever it should not respond to user-input anymore
+ * @property {boolean} dead A pointer is dead whenever it's ok to clean it up
+ * @property {number} x The x position of the pointer
+ * @property {number} y The y position of the pointer
+ * @property {[x, y]} origin The original starting position of this pointer passed to the constructor
+ * @property {number} direction Direction the pointer is moving in in radians, is undefined if the pointer has not moved yet
+ * @property {number} speed How fast the pointer is moving, is undefined if the pointer has not moved yet. The speed is defined by taking the distance between the current location and the previous location of the pointer
+ * @property {number} rotation Angle in radians how much this pointer should be rotated around its origin, can be set with `pointer.setRotation` and read with `pointer.rotation`
+ * @property {[x, y]} previousPosition The previous position of the pointer, undefined if the pointer hasn't moved yet
+ */
 function Pointer(x, y) {
     var pointer = this;
 
@@ -37,15 +53,34 @@ function Pointer(x, y) {
 Object.defineProperties(Pointer.prototype, {
     x: {
         get: function () {
-            return this.origin[0] + (this[0] - this.origin[0]) * Math.cos(this.rotation) + (this[1] - this.origin[1]) * Math.sin(this.rotation);
+            return geometry.rotatePoint(this, this.origin, this.rotation)[0];
         }
     },
     y: {
         get: function () {
-            return this.origin[1] + (this[0] - this.origin[0]) * Math.sin(this.rotation) + (this[1] - this.origin[1]) * Math.cos(this.rotation);
+            return geometry.rotatePoint(this, this.origin, this.rotation)[1];
         }
     }
-})
+});
+
+Pointer.prototype.beforeMove = function before() {
+    this.previousPosition = [this[0], this[1]];
+};
+
+Pointer.prototype.afterMove = function after() {
+    if (! this.previousPosition) {
+        throw new ReferenceError("You've forgotten a `beforeMove` call before this `afterMove` call");
+    }
+
+    this.speed = geometry.calculateDistance(this, this.previousPosition);
+    this.direction = geometry.calculateAngle(this, this.previousPosition);
+
+    if (this.speed <= 0.01 && this.free) {
+        this.dead = true;
+    } else {
+        this.notifyPositionChangedListeners();
+    }
+};
 
 /**
  * Set the rotation of the pointer
@@ -74,7 +109,7 @@ Pointer.prototype.notifyPositionChangedListeners = function () {
     var pointer = this;
     var args = arguments;
     Object.keys(pointer.positionChangedListeners).map(function (key) {
-        return pointer.positionChangedListeners[key]
+        return pointer.positionChangedListeners[key];
     }).forEach(function (listener) {
         listener.apply(pointer, args);
     });
@@ -82,7 +117,7 @@ Pointer.prototype.notifyPositionChangedListeners = function () {
 
 module.exports = Pointer;
 
-},{}],3:[function(require,module,exports){
+},{"./geometry":4}],3:[function(require,module,exports){
 function PointerManager(ctx) {
     var manager = this;
     // this is the code that manages all the physics objects
@@ -118,7 +153,7 @@ PointerManager.prototype.addEntity = function (entity) {
 
 PointerManager.prototype.setTarget = function (x, y) {
     this.entities.forEach(function(entity) {
-        entity.setTarget([x, y]);
+        entity.setTarget(x, y);
     });
 }
 
@@ -131,19 +166,49 @@ PointerManager.prototype.freeEntities = function () {
 module.exports = PointerManager;
 
 },{}],4:[function(require,module,exports){
-// calculate speed using Pythagoras' formula
-function calculateDistance (lastPosition, currentPosition) {
-    var dx = lastPosition[0] - currentPosition[0];
-    var dy = lastPosition[1] - currentPosition[1];
+/**
+ * Calculate a distance using pythagoras' formula
+ * @param  {[x, y]} firstPoint  The first point
+ * @param  {[x, y]} secondPoint The second point
+ * @return {number}             Distance between the two points
+ */
+function calculateDistance (firstPoint, secondPoint) {
+    var dx = firstPoint[0] - secondPoint[0];
+    var dy = firstPoint[1] - secondPoint[1];
 
     return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
 }
 
-function calculateAngle (lastPosition, currentPosition) {
-    var dx = lastPosition[0] - currentPosition[0];
-    var dy = lastPosition[1] - currentPosition[1];
+/**
+ * Calculate the angle between two points
+ * @param  {[x, y]} firstPoint  The first point
+ * @param  {[x, y]} secondPoint The second point
+ * @return {number}             Angle between the two points
+ */
+function calculateAngle (firstPoint, secondPoint) {
+    var dx = firstPoint[0] - secondPoint[0];
+    var dy = firstPoint[1] - secondPoint[1];
 
     return Math.atan2(dy, dx);
+}
+
+/**
+ * Rotate a point around an origin with angle `angle`
+ * @param  {[x, y]} point  The point you want to rotate
+ * @param  {[x, y]} origin An origin you want to rotate around
+ * @param  {number} angle  How much the point should be rotated in radians
+ * @return {[x, y]}        The rotated point
+ */
+function rotatePoint (point, origin, angle) {
+    var x = origin[0] +
+      (point[0] - origin[0]) * Math.cos(angle) +
+      (point[1] - origin[1]) * Math.sin(angle);
+
+    var y = origin[1] +
+      (point[0] - origin[0]) * Math.sin(angle) +
+      (point[1] - origin[1]) * Math.cos(angle);
+
+    return [x, y];
 }
 
 /**
@@ -159,17 +224,18 @@ function withinCircle(origin, point, radius) {
 module.exports = {
     calculateDistance: calculateDistance,
     calculateAngle: calculateAngle,
-    withinCircle: withinCircle
+    withinCircle: withinCircle,
+    rotatePoint: rotatePoint,
 };
 
 },{}],5:[function(require,module,exports){
-// The cursor pointer is a pointer
-// whose position is always equal
-// to the mouse's position
-
 var Pointer = require("../Pointer");
 
 Cursor.prototype = new Pointer(0, 0);
+/**
+ * Cursor is the pointer whose position is always equal to the mouse's position
+ * As with all pointers, you have access to .x and .y positions, speed, direction and previousPosition
+ */
 function Cursor() {
     var cursor = this;
     Pointer.apply(this, arguments);
@@ -196,56 +262,32 @@ module.exports = Cursor;
 
 },{"../Pointer":2}],6:[function(require,module,exports){
 var Pointer = require("../Pointer");
-var geometry = require("../geometry");
 
-// this is an abstract class, treat it as such.
 PhysicsPointer.prototype = new Pointer(0, 0);
 /**
- * Attributes
- * @attribute target           {[x, y]} The target this pointer is using to calculate its next position
- * @attribute previousPosition {[x, y]} The previous position of the pointer
- * @attribute free             {bool}   True if it should respond to user-input, false otherwise
- * @attribute dead             {bool}   Pointer won't move anymore when it is dead, you shouldn't have to set this yourself
- * @attribute speed            {number} Current speed of the pointer
- * @attribute angle            {number} The direction the pointer is currently going in in radians
+ * PhysicsPointer is a base-class for pointers that rely on differential equations for movement. In other words, if your pointer deals with velocity/friction/jerk/gravity and a step function to move, use the PhysicsPointer
+ * @inheritDoc
+ * @attribute target {[x, y]} The target this pointer is using to calculate its next position
  */
 function PhysicsPointer() {
     Pointer.apply(this, arguments);
     this.target = [this[0], this[1]];
 }
 
-PhysicsPointer.prototype.setTarget = function (target) {
+PhysicsPointer.prototype.setTarget = function (x, y) {
     if (!this.free) {
-        this.target = target;
+        this.target[0] = x;
+        this.target[1] = y;
     }
 };
 
 PhysicsPointer.prototype.step = function() {
-    console.log("Please implement the step function for your pointer");
-};
-
-PhysicsPointer.prototype.beforeStep = function () {
-    this.previousPosition = [this[0], this[1]];
-};
-
-PhysicsPointer.prototype.afterStep = function after() {
-    if (! this.previousPosition) {
-        throw new ReferenceError("You've forgotten a `beforeStep` call in your step function");
-    }
-
-    this.speed = geometry.calculateDistance(this, this.previousPosition);
-    this.angle = geometry.calculateAngle(this, this.previousPosition);
-
-    if (this.speed <= 0.01 && this.free) {
-        this.dead = true;
-    } else {
-        this.notifyPositionChangedListeners();
-    }
+    throw new ReferenceError("An object inheriting from PhysicsPointer is missing its step function");
 };
 
 module.exports = PhysicsPointer;
 
-},{"../Pointer":2,"../geometry":4}],7:[function(require,module,exports){
+},{"../Pointer":2}],7:[function(require,module,exports){
 var PhysicsPointer = require("./PhysicsPointer");
 
 Slider.prototype = new PhysicsPointer(0, 0);
@@ -258,7 +300,7 @@ function Slider() {
 }
 
 Slider.prototype.step = function () {
-    this.beforeStep();
+    this.beforeMove();
 
     if (!this.dead) {
         var dx = this.target[0] - this[0];
@@ -275,7 +317,7 @@ Slider.prototype.step = function () {
         this[0] += this.velocity[0];
         this[1] += this.velocity[1];
 
-        this.afterStep();
+        this.afterMove();
     }
 };
 
@@ -292,7 +334,7 @@ function Stalker() {
 }
 
 Stalker.prototype.step = function() {
-    this.beforeStep();
+    this.beforeMove();
 
     if (!this.dead) {
         var dx = this.target[0] - this[0];
@@ -301,7 +343,7 @@ Stalker.prototype.step = function() {
         this[0] += dx * this.stepSize;
         this[1] += dy * this.stepSize;
 
-       this.afterStep();
+       this.afterMove();
     }
 };
 
@@ -319,7 +361,7 @@ function Swinger() {
 }
 
 Swinger.prototype.step = function() {
-    this.beforeStep();
+    this.beforeMove();
 
     if (!this.dead) {
         var dx = this.target[0] - this[0];
@@ -333,7 +375,7 @@ Swinger.prototype.step = function() {
         this[0] += this.velocity[0];
         this[1] += this.velocity[1];
 
-        this.afterStep();
+        this.afterMove();
     }
 };
 
@@ -360,8 +402,8 @@ function _bootstrapMirror(fn) {
             copy[0] = newPosition[0];
             copy[1] = newPosition[1];
 
-            if (originalPointer.afterStep) {
-                originalPointer.afterStep.call(copy);
+            if (originalPointer.afterMove) {
+                originalPointer.afterMove.call(copy);
             }
             copy.drawFn();
         });

@@ -33,7 +33,7 @@ PointerManager.prototype.addEntity = function (entity) {
 
 PointerManager.prototype.setTarget = function (x, y) {
     this.entities.forEach(function(entity) {
-        entity.setTarget([x, y]);
+        entity.setTarget(x, y);
     });
 }
 

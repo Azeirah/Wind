@@ -1,3 +1,19 @@
+var geometry = require("./geometry");
+
+/**
+ * Base class for any pointer-like object
+ * @param {number} x Initial x position
+ * @param {number} y Initial y position
+ * @property {boolean} free A pointer is free whenever it should not respond to user-input anymore
+ * @property {boolean} dead A pointer is dead whenever it's ok to clean it up
+ * @property {number} x The x position of the pointer
+ * @property {number} y The y position of the pointer
+ * @property {[x, y]} origin The original starting position of this pointer passed to the constructor
+ * @property {number} direction Direction the pointer is moving in in radians, is undefined if the pointer has not moved yet
+ * @property {number} speed How fast the pointer is moving, is undefined if the pointer has not moved yet. The speed is defined by taking the distance between the current location and the previous location of the pointer
+ * @property {number} rotation Angle in radians how much this pointer should be rotated around its origin, can be set with `pointer.setRotation` and read with `pointer.rotation`
+ * @property {[x, y]} previousPosition The previous position of the pointer, undefined if the pointer hasn't moved yet
+ */
 function Pointer(x, y) {
     var pointer = this;
 
@@ -26,15 +42,34 @@ function Pointer(x, y) {
 Object.defineProperties(Pointer.prototype, {
     x: {
         get: function () {
-            return this.origin[0] + (this[0] - this.origin[0]) * Math.cos(this.rotation) + (this[1] - this.origin[1]) * Math.sin(this.rotation);
+            return geometry.rotatePoint(this, this.origin, this.rotation)[0];
         }
     },
     y: {
         get: function () {
-            return this.origin[1] + (this[0] - this.origin[0]) * Math.sin(this.rotation) + (this[1] - this.origin[1]) * Math.cos(this.rotation);
+            return geometry.rotatePoint(this, this.origin, this.rotation)[1];
         }
     }
-})
+});
+
+Pointer.prototype.beforeMove = function before() {
+    this.previousPosition = [this[0], this[1]];
+};
+
+Pointer.prototype.afterMove = function after() {
+    if (! this.previousPosition) {
+        throw new ReferenceError("You've forgotten a `beforeMove` call before this `afterMove` call");
+    }
+
+    this.speed = geometry.calculateDistance(this, this.previousPosition);
+    this.direction = geometry.calculateAngle(this, this.previousPosition);
+
+    if (this.speed <= 0.01 && this.free) {
+        this.dead = true;
+    } else {
+        this.notifyPositionChangedListeners();
+    }
+};
 
 /**
  * Set the rotation of the pointer
@@ -63,7 +98,7 @@ Pointer.prototype.notifyPositionChangedListeners = function () {
     var pointer = this;
     var args = arguments;
     Object.keys(pointer.positionChangedListeners).map(function (key) {
-        return pointer.positionChangedListeners[key]
+        return pointer.positionChangedListeners[key];
     }).forEach(function (listener) {
         listener.apply(pointer, args);
     });

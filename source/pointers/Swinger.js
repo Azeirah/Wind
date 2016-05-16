@@ -9,7 +9,7 @@ function Swinger() {
 }
 
 Swinger.prototype.step = function() {
-    this.beforeStep();
+    this.beforeMove();
 
     if (!this.dead) {
         var dx = this.target[0] - this[0];
@@ -23,7 +23,7 @@ Swinger.prototype.step = function() {
         this[0] += this.velocity[0];
         this[1] += this.velocity[1];
 
-        this.afterStep();
+        this.afterMove();
     }
 };
 

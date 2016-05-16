@@ -1,10 +1,10 @@
-// The cursor pointer is a pointer
-// whose position is always equal
-// to the mouse's position
-
 var Pointer = require("../Pointer");
 
 Cursor.prototype = new Pointer(0, 0);
+/**
+ * Cursor is the pointer whose position is always equal to the mouse's position
+ * As with all pointers, you have access to .x and .y positions, speed, direction and previousPosition
+ */
 function Cursor() {
     var cursor = this;
     Pointer.apply(this, arguments);

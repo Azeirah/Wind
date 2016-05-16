@@ -8,7 +8,7 @@ function Stalker() {
 }
 
 Stalker.prototype.step = function() {
-    this.beforeStep();
+    this.beforeMove();
 
     if (!this.dead) {
         var dx = this.target[0] - this[0];
@@ -17,7 +17,7 @@ Stalker.prototype.step = function() {
         this[0] += dx * this.stepSize;
         this[1] += dy * this.stepSize;
 
-       this.afterStep();
+       this.afterMove();
     }
 };
 

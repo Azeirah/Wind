@@ -18,8 +18,8 @@ function _bootstrapMirror(fn) {
             copy[0] = newPosition[0];
             copy[1] = newPosition[1];
 
-            if (originalPointer.afterStep) {
-                originalPointer.afterStep.call(copy);
+            if (originalPointer.afterMove) {
+                originalPointer.afterMove.call(copy);
             }
             copy.drawFn();
         });

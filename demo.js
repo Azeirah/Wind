@@ -91,7 +91,7 @@ function drawArrow(ctx, pointer) {
         pointer[1],
         (pointer.speed / 10) * ratio,
         (pointer.speed / 10) * (1 - ratio),
-        pointer.angle,
+        pointer.direction,
         0,
         2 * Math.PI
     );
