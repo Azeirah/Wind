@@ -32,13 +32,28 @@ function calculateAngle (firstPoint, secondPoint) {
  * @return {[x, y]}        The rotated point
  */
 function rotatePoint (point, origin, angle) {
-    var x = origin[0] +
-      (point[0] - origin[0]) * Math.cos(angle) +
-      (point[1] - origin[1]) * Math.sin(angle);
+    var sin = Math.sin(angle);
+    var cos = Math.cos(angle);
 
-    var y = origin[1] +
-      (point[0] - origin[0]) * Math.sin(angle) +
-      (point[1] - origin[1]) * Math.cos(angle);
+    var xRotated = (point[0] - origin[0]) * cos - (point[1] - origin[1]) * sin;
+    var yRotated = (point[0] - origin[0]) * sin + (point[1] - origin[1]) * cos;
+
+    var x = xRotated + origin[0];
+    var y = yRotated + origin[1];
+
+    return [x, y];
+}
+
+/**
+ * Scales a point from an origin, a point at (5, 5) with a scale of two and origin of (0, 0) will be at (10, 10)
+ * @param  {[type]} point  The point you want to scale
+ * @param  {[type]} origin The origin you want to scale from
+ * @param  {[type]} scale  How much you want to scale, 1 means no scaling, 0.5 means half, 2 means double etc...
+ * @return {[type]}        The new scaled point
+ */
+function scalePoint (point, origin, scale) {
+    var x = point[0] + (point[0] - origin[0]) * scale;
+    var y = point[1] + (point[1] - origin[1]) * scale;
 
     return [x, y];
 }
@@ -54,8 +69,9 @@ function withinCircle(origin, point, radius) {
 }
 
 module.exports = {
-    calculateDistance: calculateDistance,
-    calculateAngle: calculateAngle,
-    withinCircle: withinCircle,
-    rotatePoint: rotatePoint,
+    calculateDistance : calculateDistance,
+    calculateAngle    : calculateAngle,
+    withinCircle      : withinCircle,
+    rotatePoint       : rotatePoint,
+    scalePoint        : scalePoint
 };

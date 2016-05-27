@@ -9,6 +9,9 @@
 		},
 		{
 			"path": "/run/user/1000/gvfs/ftp:host=martijnbrekelmans.com/www/blog"
+		},
+		{
+			"path": "/home/az/Documents/school/driver-ontwikkeling/stuffs"
 		}
 	],
 	"ternjs":

@@ -95,7 +95,6 @@ function drawArrow(ctx, pointer) {
         0,
         2 * Math.PI
     );
-    ctx.closePath();
     ctx.fill();
 }
 

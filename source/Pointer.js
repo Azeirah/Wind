@@ -37,17 +37,18 @@ function Pointer(x, y) {
     pointer.origin = [x, y];
 
     pointer.rotation = 0;
+    pointer.scaling = 1;
 }
 
 Object.defineProperties(Pointer.prototype, {
     x: {
         get: function () {
-            return geometry.rotatePoint(this, this.origin, this.rotation)[0];
+            return geometry.scalePoint(geometry.rotatePoint(this, this.origin, this.rotation), this.origin, this.scaling)[0];
         }
     },
     y: {
         get: function () {
-            return geometry.rotatePoint(this, this.origin, this.rotation)[1];
+            return geometry.scalePoint(geometry.rotatePoint(this, this.origin, this.rotation), this.origin, this.scaling)[1];
         }
     }
 });
@@ -78,6 +79,10 @@ Pointer.prototype.afterMove = function after() {
 Pointer.prototype.setRotation = function (rotation) {
     this.rotation = rotation;
 };
+
+Pointer.prototype.setScale = function (scale) {
+    this.scaling = scale;
+}
 
 Pointer.prototype.setDrawingFunction = function (drawFn) {
     this.drawFn = drawFn;
