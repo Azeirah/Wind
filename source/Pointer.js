@@ -57,6 +57,7 @@ Pointer.prototype.beforeMove = function before() {
     this.previousPosition = {
         '0': this[0],
         '1': this[1],
+        // x and y are stored for the end-user, if pointer.x/y are available, so should pointer.previousPosition.x/y
         x: this.x,
         y: this.y
     };

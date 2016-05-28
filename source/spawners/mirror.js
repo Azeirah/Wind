@@ -1,18 +1,22 @@
 var Pointer = require("../Pointer");
 
+/**
+ * Higher-order function to generate mirrors, it gives the mirror pointer the right speed, origin, initial position, scaling, rotation.
+ * All you have to do to create a new mirror is pass a function that computes a new position from the original pointer and an origin to mirror around
+ * @param  {Function} fn [description]
+ * @return {[type]}      [description]
+ */
 function _bootstrapMirror(fn) {
     return function(originalPointer, origin) {
         var initialPosition = fn(originalPointer, origin);
         var copy = new Pointer(initialPosition[0], initialPosition[1]);
-        copy.origin = origin;
+        copy.origin = initialPosition;
         copy.setDrawingFunction(originalPointer.drawFn);
 
         originalPointer.onPositionChanged(function() {
-            copy.rotation = originalPointer.rotation;
             copy.scaling = originalPointer.scaling;
-            if (copy[0] !== undefined && copy[1] !== undefined) {
-                originalPointer.beforeMove.call(copy);
-            }
+            copy.rotation = originalPointer.rotation;
+            originalPointer.beforeMove.call(copy);
 
             // position is calculated by the passed function
             var newPosition = fn(originalPointer, origin);
@@ -20,24 +24,25 @@ function _bootstrapMirror(fn) {
             copy[1] = newPosition[1];
 
             originalPointer.afterMove.call(copy);
+
             copy.drawFn();
         });
     };
 }
 
 var _mirrorHorizontal = _bootstrapMirror(function(originalPointer, origin) {
-    return [origin[0] + origin[0] - originalPointer.x,
-            originalPointer.y];
+    return [origin[0] + origin[0] - originalPointer[0],
+            originalPointer[1]];
 });
 
 var _mirrorVertical = _bootstrapMirror(function(originalPointer, origin) {
-    return [originalPointer.x,
-            origin[1] + origin[1] - originalPointer.y];
+    return [originalPointer[0],
+            origin[1] + origin[1] - originalPointer[1]];
 });
 
 var _mirrorDiagonal = _bootstrapMirror(function(originalPointer, origin) {
-    return [origin[0] + origin[0] - originalPointer.x,
-            origin[1] + origin[1] - originalPointer.y];
+    return [origin[0] + origin[0] - originalPointer[0],
+            origin[1] + origin[1] - originalPointer[1]];
 });
 
 /**
@@ -54,7 +59,7 @@ var _mirrorDiagonal = _bootstrapMirror(function(originalPointer, origin) {
  * mirror(pointer, "diagonal", [pointer[0], pointer[1]]) // local diagonal mirroring
  *
  * All attributes of the original pointer are continuously copied to the mirrored pointer
- * so speed and angle can be accessed from the mirror pointer.
+ * so attributes like speed and direction can be accessed from the mirror pointer.
  */
 function mirror(pointer, how, origin) {
     if (!origin) {
