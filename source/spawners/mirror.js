@@ -15,7 +15,7 @@ function _bootstrapMirror(fn) {
 
         originalPointer.onPositionChanged(function() {
             copy.scaling = originalPointer.scaling;
-            copy.rotation = originalPointer.rotation;
+            copy.rotation = -originalPointer.rotation;
             originalPointer.beforeMove.call(copy);
 
             // position is calculated by the passed function
