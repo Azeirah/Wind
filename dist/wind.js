@@ -48,7 +48,7 @@ function Pointer(x, y) {
     pointer.origin = [x, y];
 
     pointer.rotation = 0;
-    pointer.scaling = 1;
+    pointer.scaling = 0;
 }
 
 Object.defineProperties(Pointer.prototype, {
@@ -65,7 +65,12 @@ Object.defineProperties(Pointer.prototype, {
 });
 
 Pointer.prototype.beforeMove = function before() {
-    this.previousPosition = [this[0], this[1]];
+    this.previousPosition = {
+        '0': this[0],
+        '1': this[1],
+        x: this.x,
+        y: this.y
+    };
 };
 
 Pointer.prototype.afterMove = function after() {
@@ -93,7 +98,7 @@ Pointer.prototype.setRotation = function (rotation) {
 
 Pointer.prototype.setScale = function (scale) {
     this.scaling = scale;
-}
+};
 
 Pointer.prototype.setDrawingFunction = function (drawFn) {
     this.drawFn = drawFn;
@@ -411,13 +416,14 @@ function _bootstrapMirror(fn) {
     return function(originalPointer, origin) {
         var initialPosition = fn(originalPointer, origin);
         var copy = new Pointer(initialPosition[0], initialPosition[1]);
-        copy.rotation = originalPointer.rotation;
         copy.origin = origin;
         copy.setDrawingFunction(originalPointer.drawFn);
 
         originalPointer.onPositionChanged(function() {
+            copy.rotation = originalPointer.rotation;
+            copy.scaling = originalPointer.scaling;
             if (copy[0] !== undefined && copy[1] !== undefined) {
-                copy.previousPosition = [copy[0], copy[1]];
+                originalPointer.beforeMove.call(copy);
             }
 
             // position is calculated by the passed function
@@ -425,9 +431,7 @@ function _bootstrapMirror(fn) {
             copy[0] = newPosition[0];
             copy[1] = newPosition[1];
 
-            if (originalPointer.afterMove) {
-                originalPointer.afterMove.call(copy);
-            }
+            originalPointer.afterMove.call(copy);
             copy.drawFn();
         });
     };

@@ -37,7 +37,7 @@ function Pointer(x, y) {
     pointer.origin = [x, y];
 
     pointer.rotation = 0;
-    pointer.scaling = 1;
+    pointer.scaling = 0;
 }
 
 Object.defineProperties(Pointer.prototype, {
@@ -54,7 +54,12 @@ Object.defineProperties(Pointer.prototype, {
 });
 
 Pointer.prototype.beforeMove = function before() {
-    this.previousPosition = [this[0], this[1]];
+    this.previousPosition = {
+        '0': this[0],
+        '1': this[1],
+        x: this.x,
+        y: this.y
+    };
 };
 
 Pointer.prototype.afterMove = function after() {
@@ -82,7 +87,7 @@ Pointer.prototype.setRotation = function (rotation) {
 
 Pointer.prototype.setScale = function (scale) {
     this.scaling = scale;
-}
+};
 
 Pointer.prototype.setDrawingFunction = function (drawFn) {
     this.drawFn = drawFn;
