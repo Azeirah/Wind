@@ -8,11 +8,12 @@ var geometry = require("./geometry");
  * @property {boolean} dead A pointer is dead whenever it's ok to clean it up
  * @property {number} x The x position of the pointer
  * @property {number} y The y position of the pointer
- * @property {[x, y]} origin The original starting position of this pointer passed to the constructor
+ * @property {[x, y].x/.y} origin The original starting position of this pointer passed to the constructor
  * @property {number} direction Direction the pointer is moving in in radians, is undefined if the pointer has not moved yet
  * @property {number} speed How fast the pointer is moving, is undefined if the pointer has not moved yet. The speed is defined by taking the distance between the current location and the previous location of the pointer
+ * @property {number} lifetime This numbers keeps track of how many times the position of the pointer has been updated via the notifyPositionChangedListeners call.
  * @property {number} rotation Angle in radians how much this pointer should be rotated around its origin, can be set with `pointer.setRotation` and read with `pointer.rotation`
- * @property {[x, y]} previousPosition The previous position of the pointer, undefined if the pointer hasn't moved yet
+ * @property {[x, y].x/.y} previousPosition The previous position of the pointer, undefined if the pointer hasn't moved yet
  */
 function Pointer(x, y) {
     var pointer = this;
@@ -35,7 +36,12 @@ function Pointer(x, y) {
     pointer[1] = y;
 
     pointer.origin = [x, y];
+    pointer.origin.x = this.x;
+    pointer.origin.y = this.y;
 
+    pointer.lifetime = 0;
+
+    // transformations
     pointer.rotation = 0;
     pointer.scaling = 0;
 }
@@ -108,6 +114,9 @@ Pointer.prototype.onPositionChanged = function (callback) {
 Pointer.prototype.notifyPositionChangedListeners = function () {
     var pointer = this;
     var args = arguments;
+
+    pointer.lifetime += 1;
+
     Object.keys(pointer.positionChangedListeners).map(function (key) {
         return pointer.positionChangedListeners[key];
     }).forEach(function (listener) {
