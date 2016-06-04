@@ -420,7 +420,7 @@ Swinger.prototype.step = function() {
 module.exports = Swinger;
 
 },{"./PhysicsPointer":6}],10:[function(require,module,exports){
-var Pointer = require("../Pointer");
+ var Pointer = require("../Pointer");
 
 /**
  * Higher-order function to generate mirrors, it gives the mirror pointer the right speed, origin, initial position, scaling, rotation.
@@ -430,18 +430,21 @@ var Pointer = require("../Pointer");
  */
 function _bootstrapMirror(fn) {
     return function(originalPointer, origin) {
-        var initialPosition = fn(originalPointer, origin);
+        var pointerAttrs = fn(originalPointer, origin);
+        var initialPosition = pointerAttrs.position;
         var copy = new Pointer(initialPosition[0], initialPosition[1]);
         copy.origin = initialPosition;
+        copy.rotation = pointerAttrs.rotation;
         copy.setDrawingFunction(originalPointer.drawFn);
 
         originalPointer.onPositionChanged(function() {
+            var pointerAttrs = fn(originalPointer, origin);
             copy.scaling = originalPointer.scaling;
-            copy.rotation = -originalPointer.rotation;
+            copy.rotation = pointerAttrs.rotation;
             originalPointer.beforeMove.call(copy);
 
             // position is calculated by the passed function
-            var newPosition = fn(originalPointer, origin);
+            var newPosition = pointerAttrs.position;
             copy[0] = newPosition[0];
             copy[1] = newPosition[1];
 
@@ -453,18 +456,36 @@ function _bootstrapMirror(fn) {
 }
 
 var _mirrorHorizontal = _bootstrapMirror(function(originalPointer, origin) {
-    return [origin[0] + origin[0] - originalPointer[0],
-            originalPointer[1]];
+    return {
+        position: [
+            origin[0] + origin[0] - originalPointer[0],
+            originalPointer[1]
+        ],
+        // when mirroring, the original pointer's rotation needs to be mirrored as well. Otherwise the pointer will rotate into the wrong direction,
+        // creating skewed paths
+        rotation: -originalPointer.rotation
+    };
 });
 
 var _mirrorVertical = _bootstrapMirror(function(originalPointer, origin) {
-    return [originalPointer[0],
-            origin[1] + origin[1] - originalPointer[1]];
+    return {
+        position: [
+            originalPointer[0],
+            origin[1] + origin[1] - originalPointer[1]
+        ],
+        rotation: -originalPointer.rotation
+    };
 });
 
 var _mirrorDiagonal = _bootstrapMirror(function(originalPointer, origin) {
-    return [origin[0] + origin[0] - originalPointer[0],
-            origin[1] + origin[1] - originalPointer[1]];
+    return {
+        position: [
+            origin[0] + origin[0] - originalPointer[0],
+            origin[1] + origin[1] - originalPointer[1]
+        ],
+        // the diagonal mirror's rotation should /not/ be inverted, it's going into the right direction already
+        rotation: originalPointer.rotation
+    };
 });
 
 /**
