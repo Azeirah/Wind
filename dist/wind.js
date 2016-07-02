@@ -55,17 +55,25 @@ function Pointer(x, y) {
     // transformations
     pointer.rotation = 0;
     pointer.scaling = 0;
+    pointer.offsetX = 0;
+    pointer.offsetY = 0;
 }
 
 Object.defineProperties(Pointer.prototype, {
     x: {
         get: function () {
-            return geometry.scalePoint(geometry.rotatePoint(this, this.origin, this.rotation), this.origin, this.scaling)[0];
+            var rotated = geometry.rotatePoint(this, this.origin, this.rotation);
+            var scaled = geometry.scalePoint(rotated, this.origin, this.scaling);
+            var translated = geometry.translatePoint(scaled, this.offsetX, this.offsetY);
+            return translated[0];
         }
     },
     y: {
         get: function () {
-            return geometry.scalePoint(geometry.rotatePoint(this, this.origin, this.rotation), this.origin, this.scaling)[1];
+            var rotated = geometry.rotatePoint(this, this.origin, this.rotation);
+            var scaled = geometry.scalePoint(rotated, this.origin, this.scaling);
+            var translated = geometry.translatePoint(scaled, this.offsetX, this.offsetY);
+            return translated[1];
         }
     }
 });
@@ -105,6 +113,11 @@ Pointer.prototype.setRotation = function (rotation) {
 
 Pointer.prototype.setScale = function (scale) {
     this.scaling = scale;
+};
+
+Pointer.prototype.setOffset = function (offsetX, offsetY) {
+    this.offsetX = offsetX;
+    this.offsetY = offsetY;
 };
 
 Pointer.prototype.setDrawingFunction = function (drawFn) {
@@ -214,6 +227,8 @@ function calculateAngle (firstPoint, secondPoint) {
 
 /**
  * Rotate a point around an origin with angle `angle`
+ * The original point remains unmutated, a new point is returned
+ *
  * @param  {[x, y]} point  The point you want to rotate
  * @param  {[x, y]} origin An origin you want to rotate around
  * @param  {number} angle  How much the point should be rotated in radians
@@ -234,14 +249,32 @@ function rotatePoint (point, origin, angle) {
 
 /**
  * Scales a point from an origin, a point at (5, 5) with a scale of two and origin of (0, 0) will be at (10, 10)
- * @param  {[type]} point  The point you want to scale
- * @param  {[type]} origin The origin you want to scale from
- * @param  {[type]} scale  How much you want to scale, 1 means no scaling, 0.5 means half, 2 means double etc...
- * @return {[type]}        The new scaled point
+ * The original point remains unmutated, a new point is returned.
+ *
+ * @param  {[x, y]} point  The point you want to scale
+ * @param  {[x, y]} origin The origin you want to scale from
+ * @param  {number} scale  How much you want to scale, 1 means no scaling, 0.5 means half, 2 means double etc...
+ * @return {[x, y]}        The new scaled point
  */
 function scalePoint (point, origin, scale) {
     var x = point[0] + (point[0] - origin[0]) * scale;
     var y = point[1] + (point[1] - origin[1]) * scale;
+
+    return [x, y];
+}
+
+/**
+ * Translates a point's location by `offsetX` and `offsetY`
+ * The original point remains unmutated, a new point is returned.
+ *
+ * @param  {[x, y]} point   The point to be translated
+ * @param  {number} offsetX The amount of translation wanted on the horizontal axis
+ * @param  {number} offsetY The amount of translation wanted on the vertical axis
+ * @return {[x, y]}         The resulting translated point
+ */
+function translatePoint(point, offsetX, offsetY) {
+    var x = point[0] + offsetX;
+    var y = point[1] + offsetY;
 
     return [x, y];
 }
@@ -261,7 +294,8 @@ module.exports = {
     calculateAngle    : calculateAngle,
     withinCircle      : withinCircle,
     rotatePoint       : rotatePoint,
-    scalePoint        : scalePoint
+    scalePoint        : scalePoint,
+    translatePoint    : translatePoint
 };
 
 },{}],5:[function(require,module,exports){
@@ -421,6 +455,7 @@ module.exports = Swinger;
 
 },{"./PhysicsPointer":6}],10:[function(require,module,exports){
  var Pointer = require("../Pointer");
+ var geometry = require("../geometry.js");
 
 /**
  * Higher-order function to generate mirrors, it gives the mirror pointer the right speed, origin, initial position, scaling, rotation.
@@ -435,12 +470,16 @@ function _bootstrapMirror(fn) {
         var copy = new Pointer(initialPosition[0], initialPosition[1]);
         copy.origin = initialPosition;
         copy.rotation = pointerAttrs.rotation;
+        copy.offsetX = pointerAttrs.offsetX;
+        copy.offsetY = pointerAttrs.offsetY;
         copy.setDrawingFunction(originalPointer.drawFn);
 
         originalPointer.onPositionChanged(function() {
             var pointerAttrs = fn(originalPointer, origin);
             copy.scaling = originalPointer.scaling;
             copy.rotation = pointerAttrs.rotation;
+            copy.offsetX = pointerAttrs.offsetX;
+            copy.offsetY = pointerAttrs.offsetY;
             originalPointer.beforeMove.call(copy);
 
             // position is calculated by the passed function
@@ -461,9 +500,12 @@ var _mirrorHorizontal = _bootstrapMirror(function(originalPointer, origin) {
             origin[0] + origin[0] - originalPointer[0],
             originalPointer[1]
         ],
-        // when mirroring, the original pointer's rotation needs to be mirrored as well. Otherwise the pointer will rotate into the wrong direction,
-        // creating skewed paths
-        rotation: -originalPointer.rotation
+        // when mirroring, the original pointer's rotation needs to be mirrored as well.
+        // Otherwise the pointer will rotate into the wrong direction, creating skewed paths
+        rotation: -originalPointer.rotation,
+        offsetX: geometry.rotatePoint([originalPointer.offsetX, originalPointer.offsetY], [0, 0], Math.PI)[0],
+        offsetY: originalPointer.offsetY
+
     };
 });
 
@@ -473,7 +515,9 @@ var _mirrorVertical = _bootstrapMirror(function(originalPointer, origin) {
             originalPointer[0],
             origin[1] + origin[1] - originalPointer[1]
         ],
-        rotation: -originalPointer.rotation
+        rotation: -originalPointer.rotation,
+        offsetX: originalPointer.offsetX,
+        offsetY: geometry.rotatePoint([originalPointer.offsetX, originalPointer.offsetY], [0, 0], Math.PI)[1]
     };
 });
 
@@ -484,7 +528,9 @@ var _mirrorDiagonal = _bootstrapMirror(function(originalPointer, origin) {
             origin[1] + origin[1] - originalPointer[1]
         ],
         // the diagonal mirror's rotation should /not/ be inverted, it's going into the right direction already
-        rotation: originalPointer.rotation
+        rotation: originalPointer.rotation,
+        offsetX: geometry.rotatePoint([originalPointer.offsetX, originalPointer.offsetY], [0, 0], Math.PI)[0],
+        offsetY: geometry.rotatePoint([originalPointer.offsetX, originalPointer.offsetY], [0, 0], Math.PI)[1],
     };
 });
 
@@ -531,5 +577,5 @@ function mirror(pointer, how, origin) {
 
 module.exports = mirror;
 
-},{"../Pointer":2}]},{},[1])(1)
+},{"../Pointer":2,"../geometry.js":4}]},{},[1])(1)
 });
