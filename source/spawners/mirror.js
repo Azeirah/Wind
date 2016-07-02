@@ -1,4 +1,5 @@
  var Pointer = require("../Pointer");
+ var geometry = require("../geometry.js");
 
 /**
  * Higher-order function to generate mirrors, it gives the mirror pointer the right speed, origin, initial position, scaling, rotation.
@@ -13,12 +14,16 @@ function _bootstrapMirror(fn) {
         var copy = new Pointer(initialPosition[0], initialPosition[1]);
         copy.origin = initialPosition;
         copy.rotation = pointerAttrs.rotation;
+        copy.offsetX = pointerAttrs.offsetX;
+        copy.offsetY = pointerAttrs.offsetY;
         copy.setDrawingFunction(originalPointer.drawFn);
 
         originalPointer.onPositionChanged(function() {
             var pointerAttrs = fn(originalPointer, origin);
             copy.scaling = originalPointer.scaling;
             copy.rotation = pointerAttrs.rotation;
+            copy.offsetX = pointerAttrs.offsetX;
+            copy.offsetY = pointerAttrs.offsetY;
             originalPointer.beforeMove.call(copy);
 
             // position is calculated by the passed function
@@ -39,9 +44,12 @@ var _mirrorHorizontal = _bootstrapMirror(function(originalPointer, origin) {
             origin[0] + origin[0] - originalPointer[0],
             originalPointer[1]
         ],
-        // when mirroring, the original pointer's rotation needs to be mirrored as well. Otherwise the pointer will rotate into the wrong direction,
-        // creating skewed paths
-        rotation: -originalPointer.rotation
+        // when mirroring, the original pointer's rotation needs to be mirrored as well.
+        // Otherwise the pointer will rotate into the wrong direction, creating skewed paths
+        rotation: -originalPointer.rotation,
+        offsetX: geometry.rotatePoint([originalPointer.offsetX, originalPointer.offsetY], [0, 0], Math.PI)[0],
+        offsetY: originalPointer.offsetY
+
     };
 });
 
@@ -51,7 +59,9 @@ var _mirrorVertical = _bootstrapMirror(function(originalPointer, origin) {
             originalPointer[0],
             origin[1] + origin[1] - originalPointer[1]
         ],
-        rotation: -originalPointer.rotation
+        rotation: -originalPointer.rotation,
+        offsetX: originalPointer.offsetX,
+        offsetY: geometry.rotatePoint([originalPointer.offsetX, originalPointer.offsetY], [0, 0], Math.PI)[1]
     };
 });
 
@@ -62,7 +72,9 @@ var _mirrorDiagonal = _bootstrapMirror(function(originalPointer, origin) {
             origin[1] + origin[1] - originalPointer[1]
         ],
         // the diagonal mirror's rotation should /not/ be inverted, it's going into the right direction already
-        rotation: originalPointer.rotation
+        rotation: originalPointer.rotation,
+        offsetX: geometry.rotatePoint([originalPointer.offsetX, originalPointer.offsetY], [0, 0], Math.PI)[0],
+        offsetY: geometry.rotatePoint([originalPointer.offsetX, originalPointer.offsetY], [0, 0], Math.PI)[1],
     };
 });
 

@@ -26,6 +26,8 @@ function calculateAngle (firstPoint, secondPoint) {
 
 /**
  * Rotate a point around an origin with angle `angle`
+ * The original point remains unmutated, a new point is returned
+ *
  * @param  {[x, y]} point  The point you want to rotate
  * @param  {[x, y]} origin An origin you want to rotate around
  * @param  {number} angle  How much the point should be rotated in radians
@@ -46,14 +48,32 @@ function rotatePoint (point, origin, angle) {
 
 /**
  * Scales a point from an origin, a point at (5, 5) with a scale of two and origin of (0, 0) will be at (10, 10)
- * @param  {[type]} point  The point you want to scale
- * @param  {[type]} origin The origin you want to scale from
- * @param  {[type]} scale  How much you want to scale, 1 means no scaling, 0.5 means half, 2 means double etc...
- * @return {[type]}        The new scaled point
+ * The original point remains unmutated, a new point is returned.
+ *
+ * @param  {[x, y]} point  The point you want to scale
+ * @param  {[x, y]} origin The origin you want to scale from
+ * @param  {number} scale  How much you want to scale, 1 means no scaling, 0.5 means half, 2 means double etc...
+ * @return {[x, y]}        The new scaled point
  */
 function scalePoint (point, origin, scale) {
     var x = point[0] + (point[0] - origin[0]) * scale;
     var y = point[1] + (point[1] - origin[1]) * scale;
+
+    return [x, y];
+}
+
+/**
+ * Translates a point's location by `offsetX` and `offsetY`
+ * The original point remains unmutated, a new point is returned.
+ *
+ * @param  {[x, y]} point   The point to be translated
+ * @param  {number} offsetX The amount of translation wanted on the horizontal axis
+ * @param  {number} offsetY The amount of translation wanted on the vertical axis
+ * @return {[x, y]}         The resulting translated point
+ */
+function translatePoint(point, offsetX, offsetY) {
+    var x = point[0] + offsetX;
+    var y = point[1] + offsetY;
 
     return [x, y];
 }
@@ -73,5 +93,6 @@ module.exports = {
     calculateAngle    : calculateAngle,
     withinCircle      : withinCircle,
     rotatePoint       : rotatePoint,
-    scalePoint        : scalePoint
+    scalePoint        : scalePoint,
+    translatePoint    : translatePoint
 };
